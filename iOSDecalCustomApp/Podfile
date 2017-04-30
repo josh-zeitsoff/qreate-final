@@ -1,0 +1,39 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'iOSDecalCustomApp' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for iOSDecalCustomApp
+
+  pod ‘Firebase/Core’
+  pod 'Firebase/Storage'
+  pod 'Firebase/Database'
+  pod 'QRCode'
+  pod 'Firebase/Auth'
+  pod 'Google/SignIn'
+  pod 'MTBBarcodeScanner'
+  pod 'Firebase/Database'
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
+  pod 'Firebase/Storage'
+  pod ‘iOS-QR-Code-Encoder’
+
+=======
+  
+>>>>>>> master
+>>>>>>> 08a91a08fdf157feab1abf1cd959c8fbe3fcf36c
+  target 'iOSDecalCustomAppTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'iOSDecalCustomAppUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
