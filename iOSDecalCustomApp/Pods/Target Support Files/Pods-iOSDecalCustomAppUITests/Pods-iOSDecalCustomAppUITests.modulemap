@@ -1,0 +1,6 @@
+framework module Pods_iOSDecalCustomAppUITests {
+  umbrella header "Pods-iOSDecalCustomAppUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

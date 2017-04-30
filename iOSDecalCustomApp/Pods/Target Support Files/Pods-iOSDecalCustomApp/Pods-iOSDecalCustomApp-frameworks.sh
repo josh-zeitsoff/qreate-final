@@ -94,6 +94,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac/GoogleToolboxForMac.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MTBBarcodeScanner/MTBBarcodeScanner.framework"
   install_framework "$BUILT_PRODUCTS_DIR/QRCode/QRCode.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/iOS-QR-Code-Encoder/iOS_QR_Code_Encoder.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/GTMOAuth2/GTMOAuth2.framework"
@@ -101,6 +102,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac/GoogleToolboxForMac.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MTBBarcodeScanner/MTBBarcodeScanner.framework"
   install_framework "$BUILT_PRODUCTS_DIR/QRCode/QRCode.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/iOS-QR-Code-Encoder/iOS_QR_Code_Encoder.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

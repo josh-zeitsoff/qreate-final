@@ -59,15 +59,6 @@ func addInvite(eventID: String, userID: String, count: Int) {
                     let invite = Invites.init(eventID: eventid, userID: userid, count: count)
                     inviteArray.append(invite)
                 }
-<<<<<<< HEAD
-            completion(inviteArray)
-            }
-        }
-        //make query
-    else {
-        completion(nil)
-    }
-=======
                 completion(inviteArray)
             }
         }
@@ -80,12 +71,4 @@ func addInvite(eventID: String, userID: String, count: Int) {
         //completion(nil)
         //}
     })
-<<<<<<< HEAD
 }*/
-=======
-}
-<<<<<<< HEAD
-
-=======
->>>>>>> master
->>>>>>> 08a91a08fdf157feab1abf1cd959c8fbe3fcf36c
