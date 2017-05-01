@@ -112,7 +112,7 @@ func getEvents(user: CurrentUser, completion: @escaping ([Event]?) -> Void) {
         if snapshot.exists() {
             if let eventsDict = snapshot.value as? [String : AnyObject] {
                 for key in eventsDict.keys {
-                    
+                    /*
                     let eventid = eventsDict[key]?["eventid"] as! String
                     let date = eventsDict[key]?["date"] as! String
                     let host = eventsDict[key]?["host"] as! String
