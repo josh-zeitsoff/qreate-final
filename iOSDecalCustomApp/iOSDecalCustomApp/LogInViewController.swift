@@ -20,45 +20,6 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate {
     @IBOutlet weak var PasswordInput: UITextField!
     
     @IBAction func LoginButton(_ sender: Any) {
-        performSegue(withIdentifier: "loginToDash", sender: nil)
-    }
-    
-    @IBAction func SignUpButton(_ sender: Any) {
-        performSegue(withIdentifier: "loginToSignUp", sender: nil)
-    }
-
-    @IBAction func unwindToLogin(segue: UIStoryboardSegue) {
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        // Firebase shit
-        GIDSignIn.sharedInstance().uiDelegate = self
-        GIDSignIn.sharedInstance().signInSilently()
-        handle = FIRAuth.auth()?.addStateDidChangeListener() { (auth, user) in
-            if user != nil {
-                self.performSegue(withIdentifier: "loginToDash", sender: nil)
-            }
-        }
-        
-    }
-    
-    //more Firebase
-    deinit {
-        if let handle = handle {
-            FIRAuth.auth()?.removeStateDidChangeListener(handle)
-        }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func loginAction(_ sender: AnyObject) {
-        
         if self.EmailInput.text == "" || self.PasswordInput.text == "" {
             
             //Alert to tell the user that there was an error because they didn't fill anything in the textfields because they didn't fill anything in
@@ -80,8 +41,7 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate {
                     print("You have successfully logged in")
                     
                     //Go to the HomeViewController if the login is sucessful
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "Home")
-                    self.present(vc!, animated: true, completion: nil)
+                    self.performSegue(withIdentifier: "loginToDash", sender: nil)
                     
                 } else {
                     
@@ -95,6 +55,45 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate {
                 }
             }
         }
+        
+    }
+    
+    @IBAction func SignUpButton(_ sender: Any) {
+        performSegue(withIdentifier: "loginToSignUp", sender: nil)
+    }
+    
+    @IBAction func unwindToLogin(segue: UIStoryboardSegue) {
+    
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        
+        // Firebase shit
+        PasswordInput.isSecureTextEntry = true
+        PasswordInput.autocorrectionType = .no
+        EmailInput.autocorrectionType = .no
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().signInSilently()
+        handle = FIRAuth.auth()?.addStateDidChangeListener() { (auth, user) in
+            if user != nil {
+                self.performSegue(withIdentifier: "loginToDash", sender: nil)
+            }
+        }
+        
+    }
+    
+    //more Firebase
+    deinit {
+        if let handle = handle {
+            FIRAuth.auth()?.removeStateDidChangeListener(handle)
+        }
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
 
