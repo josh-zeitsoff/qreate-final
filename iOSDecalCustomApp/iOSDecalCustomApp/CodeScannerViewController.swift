@@ -14,6 +14,10 @@ class CodeScannerViewController: UIViewController {
     
     @IBOutlet var previewView: UIView!
     var scanner: MTBBarcodeScanner?
+   
+    @IBAction func backButton(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "unwindToMyEvent", sender: self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
