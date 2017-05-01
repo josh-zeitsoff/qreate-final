@@ -68,10 +68,33 @@ func getInvites(user: CurrentUser, completion: @escaping ([Invite]?) -> Void) {
     })
 }
 
-//Arguments may need changing
-func getEvents(user: CurrentUser, completion: @escaping ([Event]?) -> Void) {
+func getUsers(completion: @escaping ([User]?) -> Void) {
     let dbRef = FIRDatabase.database().reference()
-    var inviteArray: [Invites] = []
+    var users: [User] = []
+    dbRef.child(firUsersNode).observeSingleEvent(of: .value, with: {
+        (snapshot) in
+        if snapshot.exists() {
+            if let invitesDict = snapshot.value as? [String : AnyObject] {
+                for key in invitesDict.keys {
+                    //let userid = invitesDict[key]?["userid"] as! String
+                    //let eventid = invitesDict[key]?["eventid"] as! String
+                    //let count = invitesDict[key]?["count"] as! String
+                    //let user = User.init(eventID: eventid, userID: userid, count: Int(count)!)
+                    //users.append(user)
+                }
+                completion(users)
+            }
+        }
+        else {
+            completion(nil)
+        }
+    })
+}
+
+//Arguments may need changing
+func getEvents(user: CurrentUser, completion: @escaping ([Invite]?) -> Void) {
+    let dbRef = FIRDatabase.database().reference()
+    var inviteArray: [Invite] = []
     dbRef.child(firEventsNode).observeSingleEvent(of: .value, with: {
         (snapshot) in
         if snapshot.exists() {

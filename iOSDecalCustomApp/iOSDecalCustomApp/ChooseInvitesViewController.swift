@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 
 class ChooseInvitesViewController: UIViewController {
+    var users : [User] = []
 
     @IBOutlet weak var ChooseInvitesTableView: UITableView!
     
@@ -22,19 +23,22 @@ class ChooseInvitesViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        getUsers(completion: { (users : [User]?) -> Void in
+            self.users = users!
+        })
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    /*
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = WhosComingTableView.dequeueReusableCell(withIdentifier: "chooseThreadCell") as! WhosComingTableViewCell
+    
+    /*func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //let cell = WhosComingTableView.dequeueReusableCell(withIdentifier: "chooseThreadCell") as! WhosComingTableViewCell
         //cell.AttendeeName.text =
         //cell.AttendeeUsername.text =
-        return cell
-    }
+        return kill
+    }*/
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return pList.count
@@ -43,7 +47,6 @@ class ChooseInvitesViewController: UIViewController {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //chosenThreadLabel.text = threadNames[indexPath.row]
     }
- */
 
 
     /*
