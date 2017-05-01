@@ -45,9 +45,9 @@ func addInvite(eventID: String, userID: String, count: Int) {
     dbRef.child(firInvitesNode).childByAutoId().setValue(dict)
 }
 
-func getInvites(user: CurrentUser, completion: @escaping ([Invite]?) -> Void) {
+func getInvites(user: CurrentUser, completion: @escaping ([Invites]?) -> Void) {
     let dbRef = FIRDatabase.database().reference()
-    var inviteArray: [Invite] = []
+    var inviteArray: [Invites] = []
     dbRef.child(firInvitesNode).observeSingleEvent(of: .value, with: {
         (snapshot) in
         if snapshot.exists() {
@@ -56,7 +56,7 @@ func getInvites(user: CurrentUser, completion: @escaping ([Invite]?) -> Void) {
                     let userid = invitesDict[key]?["userid"] as! String
                     let eventid = invitesDict[key]?["eventid"] as! String
                     let count = invitesDict[key]?["count"] as! String
-                    let invite = Invite.init(eventID: eventid, userID: userid, count: Int(count)!)
+                    let invite = Invites.init(eventID: eventid, userID: userid, count: Int(count)!)
                     inviteArray.append(invite)
                 }
                 completion(inviteArray)
@@ -81,8 +81,6 @@ func addEvent(dateString: String, host: String, location: String, name: String, 
     dbRef.child(firEventsNode).childByAutoId().setValue(dict)
 }
 
-(dateString: String, host: String, location: String, name: String, id: String)
-
 //Arguments may need changing
 func getEvents(user: CurrentUser, completion: @escaping ([Event]?) -> Void) {
     let dbRef = FIRDatabase.database().reference()
@@ -92,7 +90,7 @@ func getEvents(user: CurrentUser, completion: @escaping ([Event]?) -> Void) {
         if snapshot.exists() {
             if let eventsDict = snapshot.value as? [String : AnyObject] {
                 for key in eventsDict.keys {
-                    /*
+                    
                     let eventid = eventsDict[key]?["eventid"] as! String
                     let date = eventsDict[key]?["date"] as! String
                     let host = eventsDict[key]?["host"] as! String
