@@ -22,23 +22,12 @@ class SignUpViewController: UIViewController {
     
     @IBOutlet weak var LastNameInput: UITextField!
     
-    @IBAction func RegisterButton(_ sender: Any) {
+
+    @IBAction func BackButton(_ sender: Any) {
         self.performSegue(withIdentifier: "unwindToLogin", sender: self)
     }
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    //Authenticate a sign up account
-    @IBAction func createAccountAction(_ sender: AnyObject) {
+    @IBAction func RegisterButton(_ sender: Any) {
         if EmailInput.text == "" {
             let alertController = UIAlertController(title: "Error", message: "Please enter your email and password", preferredStyle: .alert)
             
@@ -54,8 +43,7 @@ class SignUpViewController: UIViewController {
                     print("You have successfully signed up")
                     //Goes to the Setup page which lets the user take a photo for their profile picture and also chose a username
                     
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "Home")
-                    self.present(vc!, animated: true, completion: nil)
+                    self.performSegue(withIdentifier: "unwindToLogin", sender: self)
                     
                 } else {
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
@@ -67,6 +55,17 @@ class SignUpViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
     /*
