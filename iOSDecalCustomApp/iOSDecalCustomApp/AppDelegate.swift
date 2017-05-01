@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().delegate = self
         
         self.storyboard =  UIStoryboard(name: "Main", bundle: Bundle.main)
-        let currentUser = FIRAuth.auth()?.currentUser!
+        let currentUser = FIRAuth.auth()?.currentUser
         if currentUser != nil
         {
             self.window?.rootViewController = self.storyboard?.instantiateViewController(withIdentifier: "EventDash")
