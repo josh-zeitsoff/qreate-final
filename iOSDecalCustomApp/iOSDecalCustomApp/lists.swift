@@ -45,7 +45,7 @@ func addInvite(eventID: String, userID: String, count: Int) {
     dbRef.child(firInvitesNode).childByAutoId().setValue(dict)
 }
 
-/*func getInvites(user: CurrentUser, completion: @escaping ([Invites]?) -> Void) {
+func getInvites(user: CurrentUser, completion: @escaping ([Invites]?) -> Void) {
     let dbRef = FIRDatabase.database().reference()
     var inviteArray: [Invites] = []
     dbRef.child(firInvitesNode).observeSingleEvent(of: .value, with: {
@@ -56,19 +56,14 @@ func addInvite(eventID: String, userID: String, count: Int) {
                     let userid = invitesDict[key]?["userid"] as! String
                     let eventid = invitesDict[key]?["eventid"] as! String
                     let count = invitesDict[key]?["count"] as! String
-                    let invite = Invites.init(eventID: eventid, userID: userid, count: count)
+                    let invite = Invites.init(eventID: eventid, userID: userid, count: Int(count)!)
                     inviteArray.append(invite)
                 }
                 completion(inviteArray)
             }
         }
-            //make query
         else {
             completion(nil)
         }
->>>>>>> master
-        //else {
-        //completion(nil)
-        //}
     })
-}*/
+}
