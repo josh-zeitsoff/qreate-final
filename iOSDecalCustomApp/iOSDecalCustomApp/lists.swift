@@ -45,9 +45,9 @@ func addInvite(eventID: String, userID: String, count: Int) {
     dbRef.child(firInvitesNode).childByAutoId().setValue(dict)
 }
 
-func getInvites(user: CurrentUser, completion: @escaping ([Invites]?) -> Void) {
+func getInvites(user: CurrentUser, completion: @escaping ([Invite]?) -> Void) {
     let dbRef = FIRDatabase.database().reference()
-    var inviteArray: [Invites] = []
+    var inviteArray: [Invite] = []
     dbRef.child(firInvitesNode).observeSingleEvent(of: .value, with: {
         (snapshot) in
         if snapshot.exists() {
@@ -56,8 +56,35 @@ func getInvites(user: CurrentUser, completion: @escaping ([Invites]?) -> Void) {
                     let userid = invitesDict[key]?["userid"] as! String
                     let eventid = invitesDict[key]?["eventid"] as! String
                     let count = invitesDict[key]?["count"] as! String
-                    let invite = Invites.init(eventID: eventid, userID: userid, count: Int(count)!)
+                    let invite = Invite.init(eventID: eventid, userID: userid, count: Int(count)!)
                     inviteArray.append(invite)
+                }
+                completion(inviteArray)
+            }
+        }
+        else {
+            completion(nil)
+        }
+    })
+}
+
+//Arguments may need changing
+func getEvents(user: CurrentUser, completion: @escaping ([Event]?) -> Void) {
+    let dbRef = FIRDatabase.database().reference()
+    var inviteArray: [Invites] = []
+    dbRef.child(firEventsNode).observeSingleEvent(of: .value, with: {
+        (snapshot) in
+        if snapshot.exists() {
+            if let invitesDict = snapshot.value as? [String : AnyObject] {
+                for key in invitesDict.keys {
+                    /*
+                    let userid = invitesDict[key]?["userid"] as! String
+                    let eventid = invitesDict[key]?["eventid"] as! String
+                    let count = invitesDict[key]?["count"] as! String
+                    let invite = Event.init(eventID: eventid, userID: userid, count: Int(count)!)
+                    inviteArray.append(invite)
+                     */
+                    //Modify for Event object's children
                 }
                 completion(inviteArray)
             }
