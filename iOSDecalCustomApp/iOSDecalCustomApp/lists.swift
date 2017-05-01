@@ -68,6 +68,28 @@ func getInvites(user: CurrentUser, completion: @escaping ([Invites]?) -> Void) {
     })
 }
 
+func getUsers(completion: @escaping ([User]?) -> Void) {
+    let dbRef = FIRDatabase.database().reference()
+    var users: [User] = []
+    dbRef.child(firUsersNode).observeSingleEvent(of: .value, with: {
+        (snapshot) in
+        if snapshot.exists() {
+            if let invitesDict = snapshot.value as? [String : AnyObject] {
+                for key in invitesDict.keys {
+                    //let userid = invitesDict[key]?["userid"] as! String
+                    //let eventid = invitesDict[key]?["eventid"] as! String
+                    //let count = invitesDict[key]?["count"] as! String
+                    //let user = User.init(eventID: eventid, userID: userid, count: Int(count)!)
+                    //users.append(user)
+                }
+                completion(users)
+            }
+        }
+        else {
+            completion(nil)
+        }
+    })
+}
 
 func addEvent(dateString: String, host: String, location: String, name: String, id: String) {
     let dbRef = FIRDatabase.database().reference()
@@ -80,7 +102,7 @@ func addEvent(dateString: String, host: String, location: String, name: String, 
     ]
     dbRef.child(firEventsNode).childByAutoId().setValue(dict)
 }
-
+//(dateString: String, host: String, location: String, name: String, id: String)
 //Arguments may need changing
 func getEvents(user: CurrentUser, completion: @escaping ([Event]?) -> Void) {
     let dbRef = FIRDatabase.database().reference()
@@ -97,7 +119,7 @@ func getEvents(user: CurrentUser, completion: @escaping ([Event]?) -> Void) {
                     let location = eventsDict[key]?["location"] as! String
                     let name = eventsDict[key]?["name"] as! String
                     let event = Event(dateString: date, host: host, location: location, name: name, id: eventid)
-                    eventArray.append(event)
+                    eventArray.append(event)*/
                     //Modify for Event object's children
                 }
                 completion(eventArray)

@@ -36,7 +36,8 @@ class CurrentUser {
     
     func getInvitedEvents(completion: @escaping ([String]) -> Void){
         var invitedEvents: [String] = []
-        dbRef.child(firUsersNode).child(id!).child(firInvitedEventsNode).observeSingleEvent(of: .value, with: { (snapshot) in
+        //Needs new logic!
+        dbRef.child(firUsersNode).child(id!).child(firInvitedEventsNode).queryOrdered(byChild: "userid").queryEqual(toValue: id!).observeSingleEvent(of: .value, with: { (snapshot) in
             if snapshot.exists() {
                 if let invitedEventsDict = snapshot.value as? [String: AnyObject] {
                     for key in invitedEventsDict.keys {
@@ -45,47 +46,23 @@ class CurrentUser {
                     completion(invitedEvents)
                 }
             }
-        
+ 
         })
-        
-        
-        
-        
-        
         }
-    /*
-    func getReadPostIDs(completion: @escaping ([String]) -> Void) {
-        var postArray: [String] = []
-        dbRef.child(firUsersNode).child(id).child(firReadPostsNode).observeSingleEvent(of: .value, with: { (snapshot) in
-            if snapshot.exists() {
-                if let postDict = snapshot.value as? [String : AnyObject] {
-                    for key in postDict.keys {
-                        postArray.append(postDict[key] as! String)
-                    }
-                    completion(postArray)
-                }
-            }
-        })
-        // TODO
-    }
- */
     
-    /*
-     TODO:
-     
-     Adds a new post ID to the list of post ID's under the user's readPosts node.
-     This should be fairly simple - just create a new child by auto ID under the readPosts node and set its value to the postID (string).
-     Remember to be very careful about following the structure of the User node before writing any data!
-     */
-    
-    func addNewInvitedEvent(postID: String) {
-        dbRef.child(firUsersNode).child(id!).child(firInvitedEventsNode).childByAutoId().setValue(postID)
-        // TODO
+    func addNewInvitedEvent(eventId: String) {
+        var dict = [String : String]()
+        dict["count"] = "0"
+        dict["userid"] = id!
+        dict["eventid"] = eventId
+        
+        dbRef.child(firInvitesNode).childByAutoId().setValue(dict)
+        // Test
     }
     
     func addNewHostedEvent(postID: String) {
         dbRef.child(firUsersNode).child(id!).child(firHostedEventsNode).childByAutoId().setValue(postID)
-        // TODO
+        // Test
     }
     
 }
