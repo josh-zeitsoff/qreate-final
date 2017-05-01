@@ -27,6 +27,9 @@ class MyEventViewController: UIViewController {
         performSegue(withIdentifier: "myEventToWhosComing", sender: nil)
     }
     
+    @IBAction func inviteButtonPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "myEventToChooseInvites", sender: self)
+    }
     @IBOutlet weak var FractionAttending: UILabel!
     @IBAction func ScanCodesButton(_ sender: Any) {
         performSegue(withIdentifier: "myEventToCamera", sender: nil)

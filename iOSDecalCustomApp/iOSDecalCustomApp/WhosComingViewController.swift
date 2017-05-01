@@ -16,6 +16,9 @@ class WhosComingViewController: UIViewController {
     
     @IBOutlet weak var WhosComingTableView: UITableView!
 
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "unwindToMyEvent", sender: self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
