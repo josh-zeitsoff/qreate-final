@@ -17,10 +17,6 @@ class Event {
     /// Name of the event host
     let host: String
 
-    /// List of strings of names of people who were invited
-    let invitedPeople: [String]
-
-
     /// Location of event
     let location: String
     
@@ -32,12 +28,11 @@ class Event {
     /// The ID of the event, generated automatically on Firebase
     let eventId: String
 
-    init(dateString: String, host: String, invitedPeople: [String], location: String, name: String, id: String) {
+    init(dateString: String, host: String, location: String, name: String, id: String) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
         self.date = dateFormatter.date(from: dateString)!
         self.host = host
-        self.invitedPeople = invitedPeople
         self.location = location
         self.name = name
         self.eventId = id

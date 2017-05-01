@@ -68,25 +68,41 @@ func getInvites(user: CurrentUser, completion: @escaping ([Invite]?) -> Void) {
     })
 }
 
+
+func addEvent(dateString: String, host: String, location: String, name: String, id: String) {
+    let dbRef = FIRDatabase.database().reference()
+    let dict: [String:AnyObject] = [
+        "date": dateString as AnyObject,
+        "host": host as AnyObject,
+        "location": location as AnyObject,
+        "name": name as AnyObject,
+        "eventid": id as AnyObject
+    ]
+    dbRef.child(firEventsNode).childByAutoId().setValue(dict)
+}
+
+(dateString: String, host: String, location: String, name: String, id: String)
+
 //Arguments may need changing
 func getEvents(user: CurrentUser, completion: @escaping ([Event]?) -> Void) {
     let dbRef = FIRDatabase.database().reference()
-    var inviteArray: [Invites] = []
+    var eventArray: [Event] = []
     dbRef.child(firEventsNode).observeSingleEvent(of: .value, with: {
         (snapshot) in
         if snapshot.exists() {
-            if let invitesDict = snapshot.value as? [String : AnyObject] {
-                for key in invitesDict.keys {
+            if let eventsDict = snapshot.value as? [String : AnyObject] {
+                for key in eventsDict.keys {
                     /*
-                    let userid = invitesDict[key]?["userid"] as! String
-                    let eventid = invitesDict[key]?["eventid"] as! String
-                    let count = invitesDict[key]?["count"] as! String
-                    let invite = Event.init(eventID: eventid, userID: userid, count: Int(count)!)
-                    inviteArray.append(invite)
-                     */
+                    let eventid = eventsDict[key]?["eventid"] as! String
+                    let date = eventsDict[key]?["date"] as! String
+                    let host = eventsDict[key]?["host"] as! String
+                    let location = eventsDict[key]?["location"] as! String
+                    let name = eventsDict[key]?["name"] as! String
+                    let event = Event(dateString: date, host: host, location: location, name: name, id: eventid)
+                    eventArray.append(event)
                     //Modify for Event object's children
                 }
-                completion(inviteArray)
+                completion(eventArray)
             }
         }
         else {
