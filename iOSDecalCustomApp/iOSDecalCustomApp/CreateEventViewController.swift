@@ -17,6 +17,8 @@ class CreateEventViewController: UIViewController {
   
     let currentUser = CurrentUser()
     
+    @IBOutlet weak var EventDateAndTimePicker: UIDatePicker!
+    
     @IBOutlet weak var EventNameInput: UITextField!
     
     
@@ -25,10 +27,6 @@ class CreateEventViewController: UIViewController {
     @IBAction func datePickerAction(_ sender: UIDatePicker) {
     }
 
-    
-    @IBAction func datePikcerAction(sender: AnyObject) {
-    
-    }
     
     @IBAction func CreateEventButton(_ sender: UIButton) {
         let date = String(describing: EventDateAndTimePicker.date)
