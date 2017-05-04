@@ -11,12 +11,18 @@ import Firebase
 
 class CreateEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBAction func backButton(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "unwindToDash", sender: self)
+    }
+    
     @IBOutlet weak var EventNameInput: UITextField!
     
     
     @IBOutlet weak var EventLocationInput: UITextField!
     
-    @IBOutlet weak var EventDateAndTimePicker: UIDatePicker!
+    @IBAction func datePickerAction(_ sender: UIDatePicker) {
+    }
+
     
     @IBAction func CreateEventButton(_ sender: UIButton) {
         self.performSegue(withIdentifier: "unwindToDash", sender: self)
