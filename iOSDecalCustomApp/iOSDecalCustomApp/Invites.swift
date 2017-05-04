@@ -11,12 +11,12 @@ import Foundation
 class Invites {
     
     let eventId: String
-    let userId: String
+    let username: String
     var count: Int
     
     init(eventID: String, userID: String, count: Int) {
         self.eventId = eventID
-        self.userId = userID
+        self.username = userID
         self.count = count
     }
     

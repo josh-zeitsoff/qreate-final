@@ -9,12 +9,14 @@
 import UIKit
 import Firebase
 
-class ChooseInvitesViewController: UIViewController {
-    var users : [User] = []
-
+class ChooseInvitesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    var users : [User]?
+    var toAttend: [User] = []
+    var event : Event?
     @IBOutlet weak var ChooseInvitesTableView: UITableView!
     
     @IBAction func invitePressed(_ sender: UIButton) {
+        //toAttend stuff
         self.performSegue(withIdentifier: "unwindToMyEvent", sender: self)
     }
     
@@ -22,38 +24,35 @@ class ChooseInvitesViewController: UIViewController {
         self.performSegue(withIdentifier: "unwindToMyEvent", sender: self)
     }
     
-    @IBOutlet weak var InviteButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        ChooseInvitesTableView.delegate = self
+        ChooseInvitesTableView.dataSource = self
         // Do any additional setup after loading the view.
-        getUsers(completion: { (users : [User]?) -> Void in
-            self.users = users!
-        })
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    /*
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = WhosComingTableView.dequeueReusableCell(withIdentifier: "chooseThreadCell") as! WhosComingTableViewCell
-        cell.AttendeeName.text =
-        cell.AttendeeUsername.text =
-        return kill
+        let cell = ChooseInvitesTableView.dequeueReusableCell(withIdentifier: "chooseInviteesCell") as! ChooseInvitesTableViewCell
+        cell.InviteeUsername.text = users?[indexPath.row].username
+        return cell
     }
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.length
+        return users!.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //chosenThreadLabel.text = threadNames[indexPath.row]
+        toAttend.append((users?[indexPath.row])!)
+        addInvite(eventId: (event?.eventId)!, username: (users?[indexPath.row].username!)!, count: 0)
     }
-
-    */
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -61,6 +60,6 @@ class ChooseInvitesViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+
 
 }

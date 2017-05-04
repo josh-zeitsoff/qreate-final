@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WhosComingViewController: UIViewController {
+class WhosComingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var eventId : String?
 
@@ -24,7 +24,8 @@ class WhosComingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        WhosComingTableView.dataSource = self
+        WhosComingTableView.delegate = self
         attending = [User]()
 
         // Do any additional setup after loading the view.
@@ -36,7 +37,7 @@ class WhosComingViewController: UIViewController {
         for inv in invites {
             if (inv.eventId == self.eventId!) {
                 //users is a map String -> User where the string is the userid
-                attending?.append(userDict[inv.userId]!)
+                attending?.append(userDict[inv.username]!)
             }
         }
     }
@@ -47,7 +48,7 @@ class WhosComingViewController: UIViewController {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = WhosComingTableView.dequeueReusableCell(withIdentifier: "chooseThreadCell") as! WhosComingTableViewCell
+        let cell = WhosComingTableView.dequeueReusableCell(withIdentifier: "whosComingTableViewCell") as! WhosComingTableViewCell
         
         cell.name.text = attending?[indexPath.row].username
         

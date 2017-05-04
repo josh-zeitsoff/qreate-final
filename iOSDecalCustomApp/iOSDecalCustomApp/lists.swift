@@ -17,7 +17,7 @@ let eventTypes = ["Current Events", "Invited To"]
 var userDict : [String: User] = [:]
 var invites : [Invites] = []
 
-var users: [User] = []
+var users: [User]?
 
 
 func updateInvites() {
@@ -25,7 +25,7 @@ func updateInvites() {
     var count = 0
     for inv in invites {
         let dict: [String:[String:AnyObject]] = [count.description:[
-            "userid": inv.userId as AnyObject,
+            "username": inv.username as AnyObject,
             "eventid": inv.eventId as AnyObject,
             "count": inv.count as AnyObject
         ]]
@@ -54,7 +54,7 @@ func clearAll() {
 
 
 func addUserToList(user: User) {
-    users.append(user)
+    users!.append(user)
 }
 
 func addInviteToList(invite: Invites) {
@@ -81,10 +81,10 @@ func getPerson(indexPath: IndexPath) -> String? {
     return nil
 }
 
-func addInvite(eventId: String, userId: String, count: Int) {
+func addInvite(eventId: String, username: String, count: Int) {
     let dbRef = FIRDatabase.database().reference()
     let dict: [String:AnyObject] = [
-        "userid": userId as AnyObject,
+        "username": username as AnyObject,
         "eventid": eventId as AnyObject,
         "count": count as AnyObject
     ]
@@ -112,10 +112,10 @@ func getInvites(completion: @escaping ([Invites]?) -> Void) {
         if snapshot.exists() {
             if let invitesDict = snapshot.value as? [String : AnyObject] {
                 for key in invitesDict.keys {
-                    let userid = invitesDict[key]?["userid"] as! String
+                    let userid = invitesDict[key]?["username"] as! String
                     let eventid = invitesDict[key]?["eventid"] as! String
-                    let count = invitesDict[key]?["count"] as! String
-                    let invite = Invites.init(eventID: eventid, userID: userid, count: Int(count)!)
+                    let count = invitesDict[key]?["count"] as! Int
+                    let invite = Invites.init(eventID: eventid, userID: userid, count: Int(count))
                     inviteArray.append(invite)
                     }
                 }

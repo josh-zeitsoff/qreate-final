@@ -60,11 +60,18 @@ class MyEventViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
-            if identifier == "myEventToChooseInvites" {
+            if identifier == "myEventToWhosComing" {
                 if let dest = segue.destination as? WhosComingViewController {
                     dest.eventId = event?.eventId
                 }
             }
+            else if identifier == "myEventToChooseInvites" {
+                if let dest = segue.destination as? ChooseInvitesViewController {
+                    dest.event = event
+                    dest.users = users
+                }
+            }
+            
 //            else if identifier == "goToSettings" {
 //                if let dest = segue.destination as? SettingsViewController {
 //                    // do stuff in the settingsVC before it loads
