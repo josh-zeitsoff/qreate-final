@@ -21,9 +21,7 @@ class MyEventViewController: UIViewController {
     
     @IBOutlet weak var EventDate: UILabel!
     
-    @IBOutlet weak var EventTime: UILabel!
-    
-    @IBOutlet weak var fracAttending: UILabel!
+
     var event: Event?
     var numAttending: String?
     
@@ -51,16 +49,6 @@ class MyEventViewController: UIViewController {
                 EventDate.text = String(describing: e.date)
             }
         }
-        //if e.eventid = event.eventid {
-        
-        //EventName.text = e.name
-//        EventLocation.text = e.location
-        //separate event date and time
-//        EventDate.text = e.date!
-//        EventTime.text = time!
-        //EventTime.time =
-        //fracAttending.text = "\(numAttending) \/ \()"
-        
 
         // Do any additional setup after loading the view.
     }
