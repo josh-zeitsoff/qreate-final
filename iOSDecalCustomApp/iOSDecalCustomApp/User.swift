@@ -9,13 +9,11 @@
 import Foundation
 
 class User {
-    var qr: String?
-    var hosting: [String]
+    //var qr: String?
     var username: String?
     
-    init(q :String?, host : [String], name: String?) {
-        qr = q!
-        hosting = host
+    init(name: String?) {
+        //qr = q!
         username = name!
     }
 }

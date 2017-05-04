@@ -25,12 +25,22 @@ class AttendingEventViewController: UIViewController {
     
     @IBOutlet weak var AttendingEventHost: UILabel!
     
-    @IBOutlet weak var MyQRCode: UIImageView!
+    var image : UIImage?
+    
+    @IBOutlet weak var MyQRCode: UIImageView?
+    
+    var event : Event?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        MyQRCode?.image = image
+        AttendingEventDate?.text = event?.date
+        AttendingEventLocation?.text = event?.location
+        AttendingEventName?.text = event?.name
+        AttendingEventHost?.text = event?.host
+
     }
 
     override func didReceiveMemoryWarning() {

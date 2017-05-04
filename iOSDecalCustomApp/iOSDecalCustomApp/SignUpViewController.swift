@@ -17,7 +17,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var UserNameSignUpInput: UITextField!
     
     @IBOutlet weak var PasswordSignUpInput: UITextField!
-    
+
     @IBOutlet weak var FirstNameInput: UITextField!
     
     @IBOutlet weak var LastNameInput: UITextField!
@@ -37,10 +37,11 @@ class SignUpViewController: UIViewController {
             present(alertController, animated: true, completion: nil)
             
         } else {
-            FIRAuth.auth()?.createUser(withEmail: EmailInput.text!, password: PasswordSignUpInput.text!) { (user, error) in
+            FIRAuth.auth()?.createUser(withEmail: (EmailInput.text!), password: (PasswordSignUpInput?.text!)!) { (user, error) in
                 if error == nil {
+                    addUser(userid: (user?.uid)!, username: self.UserNameSignUpInput!.text!, email: self.EmailInput!.text!, password: self.PasswordSignUpInput!.text!)
                     let changeRequest = user!.profileChangeRequest()
-                    changeRequest.displayName = self.UserNameSignUpInput.text
+                    changeRequest.displayName = self.UserNameSignUpInput?.text
                     changeRequest.commitChanges(completion: {
                     (err) in
                         if let err = err {
@@ -71,9 +72,9 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        UserNameSignUpInput.autocorrectionType = .no
-        PasswordSignUpInput.autocorrectionType = .no
-        PasswordSignUpInput.isSecureTextEntry = true
+        UserNameSignUpInput?.autocorrectionType = .no
+        PasswordSignUpInput?.autocorrectionType = .no
+        PasswordSignUpInput?.isSecureTextEntry = true
     }
 
     override func didReceiveMemoryWarning() {

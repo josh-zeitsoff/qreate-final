@@ -91,6 +91,19 @@ func addInvite(eventId: String, userId: String, count: Int) {
     dbRef.child(firInvitesNode).childByAutoId().setValue(dict)
 }
 
+func addUser(userid: String, username: String, email: String, password: String) {
+    let dbRef = FIRDatabase.database().reference()
+    
+    let dict: [String:AnyObject] = [
+        "name": username as AnyObject
+        //"userid": userid as AnyObject,
+        //"username": username as AnyObject,
+        //"email": email as AnyObject,
+        //"password" : password as AnyObject
+    ]
+    dbRef.child(firUsersNode).childByAutoId().setValue(dict)
+}
+
 func getInvites(completion: @escaping ([Invites]?) -> Void) {
     let dbRef = FIRDatabase.database().reference()
     var inviteArray: [Invites] = []
@@ -149,10 +162,9 @@ func getUsers(completion: @escaping ([User]?) -> Void) {
             if let usersDict = snapshot.value as? [String : AnyObject] {
                 for key in usersDict.keys {
                     
-                    let q = usersDict[key]?["q"] as! String
-                    let host = usersDict[key]?["host"] as! [String]
+                    //let q = usersDict[key]?["q"] as! String
                     let name = usersDict[key]?["name"] as! String
-                    let user = User.init(q: q, host: host, name: name)
+                    let user = User.init(name: name)
                     
                     users.append(user)
                     userDict[name] = user

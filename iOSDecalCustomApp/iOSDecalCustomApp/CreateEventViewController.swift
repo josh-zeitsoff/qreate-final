@@ -14,6 +14,8 @@ class CreateEventViewController: UIViewController {
     @IBAction func backButton(_ sender: Any) {
         self.performSegue(withIdentifier: "unwindToDash", sender: self)
     }
+    
+    var dateChanged = false
   
     let currentUser = CurrentUser()
     
@@ -23,22 +25,26 @@ class CreateEventViewController: UIViewController {
     
     @IBOutlet weak var EventNameInput: UITextField!
     
-    
     @IBOutlet weak var EventLocationInput: UITextField!
     
-    
     @IBAction func datePickerAction(_ sender: UIDatePicker) {
+        dateChanged = true
         print("entered")
         var dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
-        var strDate = dateFormatter.string(from: EventDateAndTimePicker.date)
+        var strDate = dateFormatter.string(from: (EventDateAndTimePicker?.date)!)
         print(strDate)
         self.date = strDate
     }
     
     @IBAction func CreateEventButton(_ sender: UIButton) {
-    
-        
+        if !dateChanged {
+            var dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = dateFormat
+            var strDate = dateFormatter.string(from: (EventDateAndTimePicker?.date)!)
+            self.date = strDate
+
+        }
         func randomString(length: Int) -> String {
 
             let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -57,7 +63,7 @@ class CreateEventViewController: UIViewController {
         let id = randomString(length: 6)
         
         
-        addEvent(dateString: date!, host: currentUser.username, location: EventLocationInput.text!, name: EventNameInput.text!, id: id)
+        addEvent(dateString: date!, host: currentUser.username, location: EventLocationInput!.text!, name: EventNameInput!.text!, id: id)
         self.performSegue(withIdentifier: "unwindToDash", sender: self)
         
         // Create event and send data
