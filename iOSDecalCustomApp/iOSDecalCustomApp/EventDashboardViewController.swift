@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class EventDashboardViewController: UIViewController, UITableViewDelegate {
+class EventDashboardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 //    var ref: FIRDatabaseReference!
 //    var events: [FIRDataSnapshot]! = []
 //    fileprivate var _refHandle: FirDatabaseHandle!
@@ -43,7 +43,7 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         EventDashboardTableView.delegate = self
-        EventDashboardTableView.dataSource = self as! UITableViewDataSource
+        EventDashboardTableView.dataSource = self
         // Do any additional setup after loading the view.
     }
     //

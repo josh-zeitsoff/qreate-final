@@ -45,10 +45,10 @@ class MyEventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         for e in events["Current Events"]! {
-            if e.eventid == event.eventid {
+            if e.eventId == event?.eventId {
                 EventName.text = e.name
                 EventLocation.text = e.location
-                EventDate.text = e.date
+                EventDate.text = String(describing: e.date)
             }
         }
         //if e.eventid = event.eventid {
@@ -73,8 +73,8 @@ class MyEventViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             if identifier == "myEventToChooseInvites" {
-                if let dest = segue.destination as? ChooseInvitesViewController {
-                    dest.eventid = event?.eventid
+                if let dest = segue.destination as? WhosComingViewController {
+                    dest.eventId = event?.eventId
                 }
             }
 //            else if identifier == "goToSettings" {
@@ -94,4 +94,5 @@ class MyEventViewController: UIViewController {
     }
     */
 
+}
 }

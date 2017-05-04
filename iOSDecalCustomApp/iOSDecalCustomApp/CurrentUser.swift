@@ -18,12 +18,14 @@ class CurrentUser {
     var invitedEvents: [String]?
     var id: String?
     
-    let dbRef = FIRDatabase.database().reference()
+    let dbRef : FIRDatabaseReference!
+    //let dbRef = FIRDatabase.database().reference()
     
     init() {
         let currentUser = FIRAuth.auth()?.currentUser
         username = currentUser?.displayName
         id = currentUser?.uid
+        dbRef =  FIRDatabase.database().reference()
     }
     
     /*

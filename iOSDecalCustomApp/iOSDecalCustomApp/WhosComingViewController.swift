@@ -30,7 +30,7 @@ class WhosComingViewController: UIViewController {
         // Do any additional setup after loading the view.
         //invites is an array of invites to be defined in lists.swift
         getInvites(completion: { (inviteObj) in
-            invites = inviteObj
+            invites = inviteObj!
         })
         
         for inv in invites {
@@ -49,7 +49,7 @@ class WhosComingViewController: UIViewController {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = WhosComingTableView.dequeueReusableCell(withIdentifier: "chooseThreadCell") as! WhosComingTableViewCell
         
-        cell.name.text = attending[indexPath.row].username
+        cell.name.text = attending?[indexPath.row].username
         
         return cell
     }

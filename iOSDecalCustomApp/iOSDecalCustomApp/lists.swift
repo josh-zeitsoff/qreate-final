@@ -11,7 +11,7 @@ import FirebaseStorage
 import FirebaseDatabase
 
 //will change later, prob not string
-var events: [String: [String]] = ["Current Events": [], "Invited To": []]
+var events: [String: [Event]] = ["Current Events": [], "Invited To": []]
 //
 let eventTypes = ["Current Events", "Invited To"]
 var userDict : [String: User] = [:]
@@ -23,10 +23,10 @@ var users: [User] = []
 
 func addEventToList(event: Event, user: CurrentUser) {
     if event.host == user.username {
-        events["Invited To"]!.append(event.name)
+        events["Invited To"]!.append(event)
     }
     else {
-        events["Current Events"]!.append(event.name)
+        events["Current Events"]!.append(event)
     }
     
 }
@@ -133,14 +133,16 @@ func getUsers(completion: @escaping ([User]?) -> Void) {
     dbRef.child(firUsersNode).observeSingleEvent(of: .value, with: {
         (snapshot) in
         if snapshot.exists() {
-            if let invitesDict = snapshot.value as? [String : AnyObject] {
-                for key in invitesDict.keys {
-                    let userid = invitesDict[key]?["userid"] as! String
-                    let eventid = invitesDict[key]?["eventid"] as! String
-                    let count = invitesDict[key]?["count"] as! String
-                    let user = User.init(eventID: eventid, userID: userid, count: Int(count)!)
+            if let usersDict = snapshot.value as? [String : AnyObject] {
+                for key in usersDict.keys {
+                    
+                    let q = usersDict[key]?["q"] as! String
+                    let host = usersDict[key]?["host"] as! [String]
+                    let name = usersDict[key]?["name"] as! String
+                    let user = User.init(q: q, host: host, name: name)
+                    
                     users.append(user)
-                    userDict[userid] = user
+                    userDict[name] = user
                 }
                 completion(users)
             }
