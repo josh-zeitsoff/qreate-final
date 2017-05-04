@@ -7,11 +7,13 @@
 //
 
 import UIKit
-import Firebase
 
 class WhosComingViewController: UIViewController {
 
+    var eventId : String?
 
+    var attending : [User]?
+    
     @IBOutlet weak var BackButton: UIButton!
     
     @IBOutlet weak var WhosComingTableView: UITableView!
@@ -22,8 +24,21 @@ class WhosComingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        attending = [User]()
 
         // Do any additional setup after loading the view.
+        //invites is an array of invites to be defined in lists.swift
+        getInvites(completion: { (inviteObj) in
+            invites = inviteObj
+        })
+        
+        for inv in invites {
+            if (inv.eventId == self.eventId!) {
+                //users is a map String -> User where the string is the userid
+                attending?.append(userDict[inv.userId]!)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,28 +48,14 @@ class WhosComingViewController: UIViewController {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = WhosComingTableView.dequeueReusableCell(withIdentifier: "chooseThreadCell") as! WhosComingTableViewCell
-        //cell.AttendeeName.text =
-        //cell.AttendeeUsername.text =
+        
+        cell.name.text = attending[indexPath.row].username
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pList.count
+        return (attending?.count)!
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //chosenThreadLabel.text = threadNames[indexPath.row]
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
