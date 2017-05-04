@@ -11,6 +11,10 @@ import Firebase
 
 class CreateEventViewController: UIViewController {
 
+    @IBAction func backButton(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "unwindToDash", sender: self)
+    }
+  
     let currentUser = CurrentUser()
     
     @IBOutlet weak var EventNameInput: UITextField!
@@ -18,7 +22,9 @@ class CreateEventViewController: UIViewController {
     
     @IBOutlet weak var EventLocationInput: UITextField!
     
-    @IBOutlet weak var EventDateAndTimePicker: UIDatePicker!
+    @IBAction func datePickerAction(_ sender: UIDatePicker) {
+    }
+
     
     @IBAction func datePikcerAction(sender: AnyObject) {
     
