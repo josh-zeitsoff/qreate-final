@@ -14,6 +14,8 @@ import FirebaseDatabase
 var events: [String: [String]] = ["Current Events": [], "Invited To": []]
 //
 let eventTypes = ["Current Events", "Invited To"]
+var userDict : [String: User] = [:]
+var invites : [Invites] = []
 
 func getEvent(indexPath: IndexPath) -> String? {
     let eventType = eventTypes[indexPath.section]
@@ -45,7 +47,7 @@ func addInvite(eventID: String, userID: String, count: Int) {
     dbRef.child(firInvitesNode).childByAutoId().setValue(dict)
 }
 
-func getInvites(user: CurrentUser, completion: @escaping ([Invites]?) -> Void) {
+func getInvites(completion: @escaping ([Invites]?) -> Void) {
     let dbRef = FIRDatabase.database().reference()
     var inviteArray: [Invites] = []
     dbRef.child(firInvitesNode).observeSingleEvent(of: .value, with: {
@@ -58,6 +60,32 @@ func getInvites(user: CurrentUser, completion: @escaping ([Invites]?) -> Void) {
                     let count = invitesDict[key]?["count"] as! String
                     let invite = Invites.init(eventID: eventid, userID: userid, count: Int(count)!)
                     inviteArray.append(invite)
+                    }
+                }
+                completion(inviteArray)
+            }
+            else {
+                completion(nil)
+            }
+        })
+}
+
+
+func getUserInvites(user: CurrentUser, completion: @escaping ([Invites]?) -> Void) {
+    let dbRef = FIRDatabase.database().reference()
+    var inviteArray: [Invites] = []
+    dbRef.child(firInvitesNode).observeSingleEvent(of: .value, with: {
+        (snapshot) in
+        if snapshot.exists() {
+            if let invitesDict = snapshot.value as? [String : AnyObject] {
+                for key in invitesDict.keys {
+                    let userid = invitesDict[key]?["userid"] as! String
+                    if (userid == user.id) {
+                        let eventid = invitesDict[key]?["eventid"] as! String
+                        let count = invitesDict[key]?["count"] as! String
+                        let invite = Invites.init(eventID: eventid, userID: userid, count: Int(count)!)
+                        inviteArray.append(invite)
+                    }
                 }
                 completion(inviteArray)
             }
@@ -76,11 +104,12 @@ func getUsers(completion: @escaping ([User]?) -> Void) {
         if snapshot.exists() {
             if let invitesDict = snapshot.value as? [String : AnyObject] {
                 for key in invitesDict.keys {
-                    //let userid = invitesDict[key]?["userid"] as! String
-                    //let eventid = invitesDict[key]?["eventid"] as! String
-                    //let count = invitesDict[key]?["count"] as! String
-                    //let user = User.init(eventID: eventid, userID: userid, count: Int(count)!)
-                    //users.append(user)
+                    let userid = invitesDict[key]?["userid"] as! String
+                    let eventid = invitesDict[key]?["eventid"] as! String
+                    let count = invitesDict[key]?["count"] as! String
+                    let user = User.init(eventID: eventid, userID: userid, count: Int(count)!)
+                    users.append(user)
+                    userDict[userid] = user
                 }
                 completion(users)
             }
