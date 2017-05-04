@@ -15,10 +15,41 @@ var events: [String: [String]] = ["Current Events": [], "Invited To": []]
 //
 let eventTypes = ["Current Events", "Invited To"]
 
-func getEvent(indexPath: IndexPath) -> String? {
+var users: [User] = []
+
+
+
+func addEventToList(event: Event, user: CurrentUser) {
+    if event.host == user.username {
+        events["Invited To"]!.append(event.name)
+    }
+    else {
+        events["Current Events"]!.append(event.name)
+    }
+    
+}
+
+func clearAll() {
+    events["Current Events"] = []
+    events["Invited To"] = []
+    invites = []
+    users = []
+}
+
+
+
+func addUserToList(user: User) {
+    users.append(user)
+}
+
+func addInviteToList(invite: Invites) {
+    invites.append(invite)
+}
+
+func getEventFromIndexPath(indexPath: IndexPath) -> Event? {
     let eventType = eventTypes[indexPath.section]
-    if let event = events[eventType] {
-        return event[indexPath.row]
+    if let currOrInvite = events[eventType] {
+        return currOrInvite[indexPath.row]
     }
     return nil
     
@@ -45,7 +76,7 @@ func addInvite(eventID: String, userID: String, count: Int) {
     dbRef.child(firInvitesNode).childByAutoId().setValue(dict)
 }
 
-func getInvites(user: CurrentUser, completion: @escaping ([Invites]?) -> Void) {
+func getInvites(completion: @escaping ([Invites]?) -> Void) {
     let dbRef = FIRDatabase.database().reference()
     var inviteArray: [Invites] = []
     dbRef.child(firInvitesNode).observeSingleEvent(of: .value, with: {
