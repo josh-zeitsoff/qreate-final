@@ -61,6 +61,9 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        UserNameSignUpInput.autocorrectionType = .no
+        PasswordSignUpInput.autocorrectionType = .no
+        PasswordSignUpInput.isSecureTextEntry = true
     }
 
     override func didReceiveMemoryWarning() {
