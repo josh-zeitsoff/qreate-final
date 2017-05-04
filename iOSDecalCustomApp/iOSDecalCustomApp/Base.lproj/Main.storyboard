@@ -649,6 +649,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="EventDateAndTimePicker" destination="Dfo-qp-Yop" id="fP1-IS-oLs"/>
                         <outlet property="EventLocationInput" destination="GgV-yG-4ok" id="YR9-3k-CoK"/>
                         <outlet property="EventNameInput" destination="wkt-LJ-T2n" id="t2S-le-J9P"/>
                     </connections>
