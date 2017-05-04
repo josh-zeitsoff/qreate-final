@@ -20,6 +20,19 @@ var invites : [Invites] = []
 var users: [User] = []
 
 
+func updateInvites() {
+    let dbRef = FIRDatabase.database().reference()
+    var count = 0
+    for inv in invites {
+        let dict: [String:[String:AnyObject]] = [count.description:[
+            "userid": inv.userId as AnyObject,
+            "eventid": inv.eventId as AnyObject,
+            "count": inv.count as AnyObject
+        ]]
+        count += 1
+    }
+    dbRef.child(firInvitesNode).setValue([:])
+}
 
 func addEventToList(event: Event, user: CurrentUser) {
     if event.host == user.username {
@@ -68,11 +81,11 @@ func getPerson(indexPath: IndexPath) -> String? {
     return nil
 }
 
-func addInvite(eventID: String, userID: String, count: Int) {
+func addInvite(eventId: String, userId: String, count: Int) {
     let dbRef = FIRDatabase.database().reference()
     let dict: [String:AnyObject] = [
-        "userid": userID as AnyObject,
-        "eventid": eventID as AnyObject,
+        "userid": userId as AnyObject,
+        "eventid": eventId as AnyObject,
         "count": count as AnyObject
     ]
     dbRef.child(firInvitesNode).childByAutoId().setValue(dict)
