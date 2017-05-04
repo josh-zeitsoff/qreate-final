@@ -19,7 +19,7 @@ class WhosComingViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var WhosComingTableView: UITableView!
 
     @IBAction func backButtonPressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "unwindToMyEvent", sender: self)
+//        self.performSegue(withIdentifier: "unwindToMyEvent", sender: self)
     }
     
     override func viewDidLoad() {
