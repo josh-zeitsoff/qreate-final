@@ -46,7 +46,7 @@ class MyEventViewController: UIViewController {
             if e.eventId == event?.eventId {
                 EventName.text = e.name
                 EventLocation.text = e.location
-                EventDate.text = String(describing: e.date)
+                EventDate.text = e.date
             }
         }
 

@@ -159,6 +159,9 @@ func getUsers(completion: @escaping ([User]?) -> Void) {
                 }
                 completion(users)
             }
+            else {
+            completion(nil)
+            }
         }
         else {
             completion(nil)
