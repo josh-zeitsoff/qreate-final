@@ -17,6 +17,8 @@ class CreateEventViewController: UIViewController {
   
     let currentUser = CurrentUser()
     
+    var date: String  = ""
+    
     @IBOutlet weak var EventDateAndTimePicker: UIDatePicker!
     
     @IBOutlet weak var EventNameInput: UITextField!
@@ -25,12 +27,14 @@ class CreateEventViewController: UIViewController {
     @IBOutlet weak var EventLocationInput: UITextField!
     
     @IBAction func datePickerAction(_ sender: UIDatePicker) {
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        var strDate = dateFormatter.string(from: EventDateAndTimePicker.date)
+        date = strDate
     }
 
     
     @IBAction func CreateEventButton(_ sender: UIButton) {
-        let date = String(describing: EventDateAndTimePicker.date)
-        
         
         func randomString(length: Int) -> String {
 
@@ -48,6 +52,7 @@ class CreateEventViewController: UIViewController {
             return randomString
         }
         let id = randomString(length: 6)
+        
         
         addEvent(dateString: date, host: currentUser.username, location: EventLocationInput.text!, name: EventNameInput.text!, id: id)
         self.performSegue(withIdentifier: "unwindToDash", sender: self)

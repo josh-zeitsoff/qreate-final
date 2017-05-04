@@ -38,12 +38,22 @@ class SignUpViewController: UIViewController {
             
         } else {
             FIRAuth.auth()?.createUser(withEmail: EmailInput.text!, password: PasswordSignUpInput.text!) { (user, error) in
-                
                 if error == nil {
-                    print("You have successfully signed up")
+                    let changeRequest = user!.profileChangeRequest()
+                    changeRequest.displayName = self.UserNameSignUpInput.text
+                    changeRequest.commitChanges(completion: {
+                    (err) in
+                        if let err = err {
+                        print(err)}
+                        else {
+                         self.performSegue(withIdentifier: "unwindToLogin", sender: self)
+                        }
+                    })
+                    
+                    //print("You have successfully signed up")
                     //Goes to the Setup page which lets the user take a photo for their profile picture and also chose a username
                     
-                    self.performSegue(withIdentifier: "unwindToLogin", sender: self)
+                    
                     
                 } else {
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
