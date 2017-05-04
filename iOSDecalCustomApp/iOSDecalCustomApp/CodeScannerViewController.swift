@@ -10,12 +10,13 @@ import UIKit
 import Firebase
 import MTBBarcodeScanner
 
-class CodeScannerViewController: UIViewController {
+class CodeScannervarwController: UIViewController {
     
     @IBOutlet var previewView: UIView!
     var scanner: MTBBarcodeScanner?
    
     @IBAction func backButton(_ sender: UIButton) {
+        updateInvites()
         self.performSegue(withIdentifier: "unwindToMyEvent", sender: self)
     }
     
@@ -33,6 +34,12 @@ class CodeScannerViewController: UIViewController {
                     for code in codes {
                         let stringValue = code.stringValue!
                         print("Found code: \(stringValue)")
+                        for inv in invites {
+                            if (inv.eventId == stringValue) {
+                                print("success")
+                                inv.count = inv.count + 1
+                            }
+                        }
                     }
                 }
             })

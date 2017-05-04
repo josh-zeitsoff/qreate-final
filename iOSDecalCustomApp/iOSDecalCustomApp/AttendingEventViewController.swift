@@ -11,7 +11,9 @@ import Firebase
 
 class AttendingEventViewController: UIViewController {
     
-    @IBOutlet weak var BackButton: UIButton!
+    @IBAction func backButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "unwindToDash", sender: self)
+    }
     
     @IBOutlet weak var AttendingEventName: UILabel!
 
