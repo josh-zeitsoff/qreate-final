@@ -36,10 +36,10 @@ func updateInvites() {
 
 func addEventToList(event: Event, user: CurrentUser) {
     if event.host == user.username {
-        events["Invited To"]!.append(event)
+        events["Current Events"]!.append(event)
     }
     else {
-        events["Current Events"]!.append(event)
+        events["Invited To"]!.append(event)
     }
     
 }
@@ -187,18 +187,19 @@ func getEvents(user: CurrentUser, completion: @escaping ([Event]?) -> Void) {
         if snapshot.exists() {
             if let eventsDict = snapshot.value as? [String : AnyObject] {
                 for key in eventsDict.keys {
-                    /*
                     let eventid = eventsDict[key]?["eventid"] as! String
                     let date = eventsDict[key]?["date"] as! String
                     let host = eventsDict[key]?["host"] as! String
                     let location = eventsDict[key]?["location"] as! String
                     let name = eventsDict[key]?["name"] as! String
                     let event = Event(dateString: date, host: host, location: location, name: name, id: eventid)
-                    eventArray.append(event)*/
+                    eventArray.append(event)
                     //Modify for Event object's children
                 }
                 completion(eventArray)
             }
+            else {
+            completion(nil)}
         }
         else {
             completion(nil)

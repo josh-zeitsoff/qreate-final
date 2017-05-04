@@ -37,14 +37,16 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
     @IBAction func unwindToDash(segue: UIStoryboardSegue) {
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        updateData()
-    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         EventDashboardTableView.delegate = self
         EventDashboardTableView.dataSource = self
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        updateData()
     }
     //
     override func didReceiveMemoryWarning() {
@@ -62,6 +64,7 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
             for event in eventsArray! {
                 addEventToList(event: event, user: self.currentUser)
             }
+            self.EventDashboardTableView.reloadData()
         })
         
         //adds all invites to the invites list
@@ -70,17 +73,19 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
             for invite in inviteArray! {
                 addInviteToList(invite: invite)
             }
+            self.EventDashboardTableView.reloadData()
         })
 
         //add all users to user list
+        /**
         getUsers(completion: {
             (usersArray) in
             for user in usersArray! {
                 addUserToList(user: user)
             }
         })
+        **/
         
-        self.EventDashboardTableView.reloadData()
         
     }
     func numberOfSections(in tableView: UITableView) -> Int {
