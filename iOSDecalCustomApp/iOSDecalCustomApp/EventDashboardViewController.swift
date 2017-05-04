@@ -46,6 +46,7 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
         EventDashboardTableView.delegate = self
         EventDashboardTableView.dataSource = self
         // Do any additional setup after loading the view.
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,8 +84,11 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
         
         getUsers(completion: {
             (usersArray) in
-            for user in usersArray! {
-                addUserToList(user: user)
+            if usersArray != nil {
+                for user in usersArray! {
+                    addUserToList(user: user)
+                }
+
             }
         })
         
@@ -117,8 +121,9 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let event = getEventFromIndexPath(indexPath: indexPath) {
             let eventType = eventTypes[indexPath.section]
+            passingEvent = event
             if eventType == "Current Events" {
-                passingEvent = event
+                
 //                let dest = MyEventViewController()
 //                dest.event = event
                 performSegue(withIdentifier: "dashToMyEvent", sender: self)
@@ -126,8 +131,10 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
                 //todo?
                 let uid = currentUser.id
                 let eid = event.eventId
-                let qrCode = QRCode(uid!)
-                
+                var qrCode = QRCode(uid!)
+                print(uid!)
+                qrCode?.color = CIColor.black()
+                qrCode?.size = CGSize(width: 300, height: 300)
                 //let dest = AttendingEventViewController()
                 passingImage = qrCode?.image
                 performSegue(withIdentifier: "dashToQREvent", sender: self)
@@ -144,7 +151,9 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
             }
             else if identifier == "dashToQREvent" {
                 if let dest = segue.destination as? AttendingEventViewController {
-                    dest.MyQRCode.image = passingImage
+                    print("xgop")
+                    dest.event = passingEvent
+                    dest.image = passingImage!
                 }
             }
         }

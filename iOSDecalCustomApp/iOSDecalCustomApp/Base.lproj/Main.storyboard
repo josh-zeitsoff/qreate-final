@@ -399,19 +399,19 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="maK-bL-cNL">
                                 <rect key="frame" x="30" y="389" width="194" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mt5-EC-oNw">
                                 <rect key="frame" x="28" y="483" width="194" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Tk-1i-a9A">
                                 <rect key="frame" x="157" y="571" width="61" height="30"/>
@@ -439,13 +439,13 @@
                                 <rect key="frame" x="26" y="223" width="194" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7D3-yc-Cvg">
                                 <rect key="frame" x="26" y="295" width="194" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eh3-FC-FT7">
                                 <rect key="frame" x="10" y="26" width="45" height="36"/>
@@ -685,7 +685,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
-                                    <action selector="backButton:" destination="AHz-Zf-n4A" eventType="touchUpInside" id="roL-0c-aSI"/>
+                                    <action selector="backButton:" destination="AHz-Zf-n4A" eventType="touchUpInside" id="fXI-3l-ZKh"/>
                                     <segue destination="WWT-Bg-STK" kind="unwind" identifier="unwindToDash" unwindAction="unwindToDashWithSegue:" id="2fe-CF-aP4"/>
                                 </connections>
                             </button>
@@ -717,7 +717,6 @@
                         <outlet property="AttendingEventHost" destination="ILk-bv-nNu" id="ZsF-7y-B9a"/>
                         <outlet property="AttendingEventLocation" destination="t9S-th-LZL" id="llk-xD-6GX"/>
                         <outlet property="AttendingEventName" destination="4db-8X-fbj" id="3n7-eh-bKk"/>
-                        <outlet property="BackButton" destination="QAc-7f-4i3" id="RO4-Ey-bl8"/>
                         <outlet property="MyQRCode" destination="AdY-qn-qZy" id="no8-Bo-Uaz"/>
                     </connections>
                 </viewController>

@@ -23,7 +23,7 @@ class CurrentUser {
     
     init() {
         let currentUser = FIRAuth.auth()?.currentUser
-        username = currentUser?.displayName
+        username = currentUser?.email
         id = currentUser?.uid
         dbRef =  FIRDatabase.database().reference()
     }
