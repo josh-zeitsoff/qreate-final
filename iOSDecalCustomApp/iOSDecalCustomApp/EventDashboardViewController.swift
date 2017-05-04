@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-
+import QRCode
 class EventDashboardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 //    var ref: FIRDatabaseReference!
 //    var events: [FIRDataSnapshot]! = []
@@ -114,6 +114,12 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
                 performSegue(withIdentifier: "dashToMyEvent", sender: self)
             } else if eventType == "Invited To" {
                 //todo?
+                let uid = currentUser.id
+                let eid = event.eventId
+                let qrCode = QRCode(uid!)
+                
+                let dest = AttendingEventViewController()
+                dest.MyQRCode.image = qrCode?.image
                 performSegue(withIdentifier: "dashToQREvent", sender: self)
             }
         }

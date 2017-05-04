@@ -9,11 +9,13 @@
 import UIKit
 import Firebase
 
-class CreateEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CreateEventViewController: UIViewController {
 
     @IBAction func backButton(_ sender: UIButton) {
         self.performSegue(withIdentifier: "unwindToDash", sender: self)
     }
+  
+    let currentUser = CurrentUser()
     
     @IBOutlet weak var EventNameInput: UITextField!
     
@@ -24,8 +26,34 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     
+    @IBAction func datePikcerAction(sender: AnyObject) {
+    
+    }
+    
     @IBAction func CreateEventButton(_ sender: UIButton) {
+        let date = String(describing: EventDateAndTimePicker.date)
+        
+        
+        func randomString(length: Int) -> String {
+
+            let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+            let len = UInt32(letters.length)
+            
+            var randomString = ""
+            
+            for _ in 0 ..< length {
+                let rand = arc4random_uniform(len)
+                var nextChar = letters.character(at: Int(rand))
+                randomString += NSString(characters: &nextChar, length: 1) as String
+            }
+            
+            return randomString
+        }
+        let id = randomString(length: 6)
+        
+        addEvent(dateString: date, host: currentUser.username, location: EventLocationInput.text!, name: EventNameInput.text!, id: id)
         self.performSegue(withIdentifier: "unwindToDash", sender: self)
+        
         // Create event and send data
     }
     
@@ -40,33 +68,8 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
         // Dispose of any resources that can be recreated.
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return pList[section]
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let p = pList[section]
-        return people[p]!.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "chooseInviteesCell", for: indexPath) as! ChooseInvitesTableViewCell
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let invitee = getPerson(indexPath: indexPath) {
-            performSegue(withIdentifier: "createEventToInvite", sender: self)
-        }
-        
-    }
-    
 
+    
     /*
     // MARK: - Navigation
 
