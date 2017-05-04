@@ -711,6 +711,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="backButton:" destination="AHz-Zf-n4A" eventType="touchUpInside" id="roL-0c-aSI"/>
+                                    <segue destination="WWT-Bg-STK" kind="unwind" identifier="unwindToDash" unwindAction="unwindToDashWithSegue:" id="2fe-CF-aP4"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -747,8 +751,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f02-eY-kkj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="WWT-Bg-STK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1798" y="547"/>
+            <point key="canvasLocation" x="1797.5999999999999" y="546.47676161919048"/>
         </scene>
         <!--Choose Invites View Controller-->
         <scene sceneID="WoG-k1-kvm">
@@ -810,7 +815,7 @@
                                 <connections>
                                     <action selector="Invite:" destination="vin-om-kOT" eventType="touchUpInside" id="8UM-cf-ssP"/>
                                     <action selector="invitePressed:" destination="vin-om-kOT" eventType="touchUpInside" id="QVE-o0-dcV"/>
-                                    <segue destination="szn-T2-7xl" kind="unwind" unwindAction="unwindToMyEventWithSegue:" id="vZs-yg-yib"/>
+                                    <segue destination="szn-T2-7xl" kind="unwind" identifier="unwindToMyEvent" unwindAction="unwindToMyEventWithSegue:" id="vZs-yg-yib"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -883,7 +888,7 @@
                                 <state key="normal" title="Back"/>
                                 <connections>
                                     <action selector="backButtonPressed:" destination="o5H-0f-SSi" eventType="touchUpInside" id="Z08-Rp-5bu"/>
-                                    <segue destination="KlN-a3-dtO" kind="unwind" unwindAction="unwindToMyEventWithSegue:" id="Odf-7n-5Ty"/>
+                                    <segue destination="KlN-a3-dtO" kind="unwind" identifier="unwindToMyEvent" unwindAction="unwindToMyEventWithSegue:" id="Odf-7n-5Ty"/>
                                 </connections>
                             </button>
                         </subviews>
