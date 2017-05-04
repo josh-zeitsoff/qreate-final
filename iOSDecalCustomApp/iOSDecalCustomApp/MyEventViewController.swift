@@ -23,6 +23,10 @@ class MyEventViewController: UIViewController {
     
     @IBOutlet weak var EventTime: UILabel!
     
+    @IBOutlet weak var fracAttending: UILabel!
+    var event: Event?
+    var numAttending: String?
+    
     @IBAction func SeeWhosComingButton(_ sender: Any) {
         performSegue(withIdentifier: "myEventToWhosComing", sender: nil)
     }
@@ -40,6 +44,23 @@ class MyEventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        for e in events["Current Events"]! {
+            if e.eventid == event.eventid {
+                EventName.text = e.name
+                EventLocation.text = e.location
+                EventDate.text = e.date
+            }
+        }
+        //if e.eventid = event.eventid {
+        
+        //EventName.text = e.name
+//        EventLocation.text = e.location
+        //separate event date and time
+//        EventDate.text = e.date!
+//        EventTime.text = time!
+        //EventTime.time =
+        //fracAttending.text = "\(numAttending) \/ \()"
+        
 
         // Do any additional setup after loading the view.
     }
@@ -47,6 +68,19 @@ class MyEventViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            if identifier == "myEventToChooseInvites" {
+                if let dest = segue.destination as? ChooseInvitesViewController {
+                    dest.eventid = event?.eventid
+                }
+            }
+//            else if identifier == "goToSettings" {
+//                if let dest = segue.destination as? SettingsViewController {
+//                    // do stuff in the settingsVC before it loads
+//                }
     }
     
 
