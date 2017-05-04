@@ -258,6 +258,9 @@
                                 <rect key="frame" x="22" y="26" width="45" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Back"/>
+                                <connections>
+                                    <segue destination="glF-Gl-AE8" kind="unwind" identifier="unwindToDash" unwindAction="unwindToDashWithSegue:" id="Z14-CY-Ydq"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MlC-tP-YDa">
                                 <rect key="frame" x="168.5" y="436" width="37" height="30"/>
