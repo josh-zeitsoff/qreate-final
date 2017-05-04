@@ -35,7 +35,7 @@ class CodeScannervarwController: UIViewController {
                         let stringValue = code.stringValue!
                         print("Found code: \(stringValue)")
                         for inv in invites {
-                            if (inv.eventId == stringValue) {
+                            if (inv.eventId == stringValue && inv.count != 1) {
                                 print("success")
                                 inv.count = inv.count + 1
                             }
