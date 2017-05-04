@@ -35,6 +35,6 @@
 	<key>GOOGLE_APP_ID</key>
 	<string>1:1045597578230:ios:e38b58254cd4b89f</string>
 	<key>DATABASE_URL</key>
-	<string>https://ioscustomapp.firebaseio.com</string>
+	<string>https://ioscustomapp.firebaseio.com/</string>
 </dict>
 </plist>

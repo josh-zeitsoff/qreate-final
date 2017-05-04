@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-
+import QRCode
 class EventDashboardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 //    var ref: FIRDatabaseReference!
 //    var events: [FIRDataSnapshot]! = []
@@ -21,6 +21,9 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     let currentUser = CurrentUser()
+    
+    var passingEvent : Event?
+    var passingImage : UIImage?
     
     
     @IBAction func signOut(_ sender: UIButton) {
@@ -37,14 +40,16 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
     @IBAction func unwindToDash(segue: UIStoryboardSegue) {
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        updateData()
-    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         EventDashboardTableView.delegate = self
         EventDashboardTableView.dataSource = self
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        updateData()
     }
     //
     override func didReceiveMemoryWarning() {
@@ -62,6 +67,7 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
             for event in eventsArray! {
                 addEventToList(event: event, user: self.currentUser)
             }
+            self.EventDashboardTableView.reloadData()
         })
         
         //adds all invites to the invites list
@@ -70,9 +76,11 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
             for invite in inviteArray! {
                 addInviteToList(invite: invite)
             }
+            self.EventDashboardTableView.reloadData()
         })
 
         //add all users to user list
+        
         getUsers(completion: {
             (usersArray) in
             for user in usersArray! {
@@ -80,7 +88,7 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
             }
         })
         
-        self.EventDashboardTableView.reloadData()
+        
         
     }
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -99,6 +107,7 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "dashCell", for: indexPath) as! EventDashboardTableViewCell
         if let event = getEventFromIndexPath(indexPath: indexPath) {
+            
             cell.EventName.text = event.name
             cell.EventDate.text = String(describing: event.date)
         }
@@ -109,12 +118,34 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
         if let event = getEventFromIndexPath(indexPath: indexPath) {
             let eventType = eventTypes[indexPath.section]
             if eventType == "Current Events" {
-                let dest = MyEventViewController()
-                dest.event = event
+                passingEvent = event
+//                let dest = MyEventViewController()
+//                dest.event = event
                 performSegue(withIdentifier: "dashToMyEvent", sender: self)
             } else if eventType == "Invited To" {
                 //todo?
+                let uid = currentUser.id
+                let eid = event.eventId
+                let qrCode = QRCode(uid!)
+                
+                //let dest = AttendingEventViewController()
+                passingImage = qrCode?.image
                 performSegue(withIdentifier: "dashToQREvent", sender: self)
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            if identifier == "dashToMyEvent" {
+                if let dest = segue.destination as? MyEventViewController {
+                    dest.event = passingEvent
+                }
+            }
+            else if identifier == "dashToQREvent" {
+                if let dest = segue.destination as? AttendingEventViewController {
+                    dest.MyQRCode.image = passingImage
+                }
             }
         }
     }

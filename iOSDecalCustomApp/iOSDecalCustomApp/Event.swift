@@ -12,7 +12,7 @@ class Event {
     
     
     /// The date of the event
-    let date: Date
+    let date: String
     
     /// Name of the event host
     let host: String
@@ -29,9 +29,7 @@ class Event {
     let eventId: String
 
     init(dateString: String, host: String, location: String, name: String, id: String) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = dateFormat
-        self.date = dateFormatter.date(from: dateString)!
+        self.date = dateString
         self.host = host
         self.location = location
         self.name = name

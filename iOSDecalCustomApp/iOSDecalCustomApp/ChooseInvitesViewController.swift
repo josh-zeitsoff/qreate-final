@@ -18,6 +18,9 @@ class ChooseInvitesViewController: UIViewController {
         self.performSegue(withIdentifier: "unwindToMyEvent", sender: self)
     }
     
+    @IBAction func backButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "unwindToMyEvent", sender: self)
+    }
     
     @IBOutlet weak var InviteButton: UIButton!
     override func viewDidLoad() {
