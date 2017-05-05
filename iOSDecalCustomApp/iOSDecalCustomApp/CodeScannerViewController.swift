@@ -17,12 +17,12 @@ class CodeScannervarwController: UIViewController {
    
     @IBAction func backButton(_ sender: UIButton) {
         updateInvites()
-        //self.performSegue(withIdentifier: "unwindToMyEvent", sender: self)
+        //self.performSegue(withIdentifier: "backToEvent", sender: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scanner = MTBBarcodeScanner(previewView: previewView)
+        scanner = MTBBarcodeScanner(previewView: self.previewView)
     }
     
     override func viewDidAppear(_ animated: Bool) {

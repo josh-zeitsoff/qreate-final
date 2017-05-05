@@ -64,7 +64,7 @@ class CreateEventViewController: UIViewController {
         
         
         addEvent(dateString: date!, host: currentUser.username, location: EventLocationInput!.text!, name: EventNameInput!.text!, id: id)
-        self.performSegue(withIdentifier: "unwindToDash", sender: self)
+        //self.performSegue(withIdentifier: "unwindToDash", sender: self)
         
         // Create event and send data
     }
@@ -73,11 +73,17 @@ class CreateEventViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.hideKeyboard()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
 

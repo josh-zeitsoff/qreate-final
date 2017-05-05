@@ -78,9 +78,10 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate {
         GIDSignIn.sharedInstance().signInSilently()
         handle = FIRAuth.auth()?.addStateDidChangeListener() { (auth, user) in
             if user != nil {
-                self.performSegue(withIdentifier: "loginToDash", sender: nil)
+                //self.performSegue(withIdentifier: "loginToDash", sender: nil)
             }
         }
+        self.hideKeyboard()
         
     }
     
@@ -98,4 +99,3 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate {
 
 
 }
-

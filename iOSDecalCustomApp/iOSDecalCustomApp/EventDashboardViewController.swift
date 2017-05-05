@@ -74,10 +74,12 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
         //adds all invites to the invites list
         getInvites(completion: {
             (inviteArray) in
-            for invite in inviteArray! {
-                addInviteToList(invite: invite)
+            if (inviteArray != nil) {
+                for invite in inviteArray! {
+                    addInviteToList(invite: invite)
+                }
+                self.EventDashboardTableView.reloadData()
             }
-            self.EventDashboardTableView.reloadData()
         })
 
         //add all users to user list

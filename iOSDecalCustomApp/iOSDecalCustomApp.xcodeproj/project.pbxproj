@@ -239,8 +239,8 @@
 			children = (
 				5B9EFE2F1E956F8C00890AD1 /* MyEventViewController.swift */,
 				5B9EFE311E9572DF00890AD1 /* WhosComingViewController.swift */,
-				5B9EFE331E95732600890AD1 /* WhosComingTableViewCell.swift */,
 				5B9EFE351E95742B00890AD1 /* CodeScannerViewController.swift */,
+				5B9EFE331E95732600890AD1 /* WhosComingTableViewCell.swift */,
 				5B9EFE2B1E956E0900890AD1 /* ChooseInvitesViewController.swift */,
 				5B9EFE2D1E956E7400890AD1 /* ChooseInvitesTableViewCell.swift */,
 			);

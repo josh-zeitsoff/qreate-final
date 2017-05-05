@@ -75,6 +75,7 @@ class SignUpViewController: UIViewController {
         UserNameSignUpInput?.autocorrectionType = .no
         PasswordSignUpInput?.autocorrectionType = .no
         PasswordSignUpInput?.isSecureTextEntry = true
+        self.hideKeyboard()
     }
 
     override func didReceiveMemoryWarning() {
@@ -82,6 +83,11 @@ class SignUpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -92,4 +98,20 @@ class SignUpViewController: UIViewController {
     }
     */
 
+}
+extension UIViewController
+{
+    func hideKeyboard()
+    {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(UIViewController.dismissKeyboard))
+        
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard()
+    {
+        view.endEditing(true)
+    }
 }
