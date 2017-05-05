@@ -23,15 +23,16 @@ var users: [User]?
 func updateInvites() {
     let dbRef = FIRDatabase.database().reference()
     var count = 0
+    var dict: [String:[String:AnyObject]]?
     for inv in invites {
-        let dict: [String:[String:AnyObject]] = [count.description:[
+        dict = [count.description:[
             "username": inv.username as AnyObject,
             "eventid": inv.eventId as AnyObject,
             "count": inv.count as AnyObject
         ]]
         count += 1
     }
-    dbRef.child(firInvitesNode).setValue([:])
+    dbRef.child(firInvitesNode).setValue(dict)
 }
 
 func addEventToList(event: Event, user: CurrentUser) {
@@ -86,7 +87,7 @@ func addInvite(eventId: String, username: String, count: Int) {
     let dict: [String:AnyObject] = [
         "username": username as AnyObject,
         "eventid": eventId as AnyObject,
-        "count": count as AnyObject
+        "count": count as Int as AnyObject
     ]
     dbRef.child(firInvitesNode).childByAutoId().setValue(dict)
 }
