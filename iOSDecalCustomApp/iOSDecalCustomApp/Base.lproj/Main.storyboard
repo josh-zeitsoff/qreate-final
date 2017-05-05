@@ -111,6 +111,7 @@
         <!--Event Dashboard View Controller-->
         <scene sceneID="6m7-zF-FJJ">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qTx-s1-pn8" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="EventDash" id="dhm-wW-Wap" customClass="EventDashboardViewController" customModule="iOSDecalCustomApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="h4K-gF-h8p"/>
@@ -205,7 +206,6 @@
                         <segue destination="BYZ-38-t0r" kind="show" identifier="dashToLogin" id="b1J-ye-NBM"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qTx-s1-pn8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="756" y="-287.40629685157421"/>
         </scene>
@@ -745,10 +745,10 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="j9Q-9M-hbo" id="fPv-RD-HwA">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="71.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Invitee Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gT1-RJ-BTh">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invitee Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gT1-RJ-BTh">
                                                     <rect key="frame" x="202" y="25" width="134" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -757,6 +757,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="gT1-RJ-BTh" firstAttribute="top" secondItem="fPv-RD-HwA" secondAttribute="topMargin" constant="17" id="Dc8-9d-7zR"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="gT1-RJ-BTh" secondAttribute="trailing" constant="31" id="I4U-am-Vbg"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="gT1-RJ-BTh" secondAttribute="bottom" constant="17.5" id="hhp-7R-XjP"/>
                                             </constraints>
                                         </tableViewCellContentView>

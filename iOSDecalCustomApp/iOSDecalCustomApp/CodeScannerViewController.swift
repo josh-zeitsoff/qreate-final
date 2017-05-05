@@ -17,7 +17,7 @@ class CodeScannervarwController: UIViewController {
    
     @IBAction func backButton(_ sender: UIButton) {
         updateInvites()
-        self.performSegue(withIdentifier: "unwindToMyEvent", sender: self)
+        //self.performSegue(withIdentifier: "unwindToMyEvent", sender: self)
     }
     
     override func viewDidLoad() {

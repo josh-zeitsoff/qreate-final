@@ -12,7 +12,7 @@ import Firebase
 class CreateEventViewController: UIViewController {
 
     @IBAction func backButton(_ sender: Any) {
-        self.performSegue(withIdentifier: "unwindToDash", sender: self)
+        //self.performSegue(withIdentifier: "unwindToDash", sender: self)
     }
     
     var dateChanged = false
