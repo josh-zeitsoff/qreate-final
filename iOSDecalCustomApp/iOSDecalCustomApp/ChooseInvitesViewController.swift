@@ -17,11 +17,11 @@ class ChooseInvitesViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBAction func invitePressed(_ sender: UIButton) {
         //toAttend stuff
-        self.performSegue(withIdentifier: "unwindToMyEvent", sender: self)
+        //self.performSegue(withIdentifier: "unwindToMyEvent", sender: self)
     }
     
     @IBAction func backButton(_ sender: Any) {
-        self.performSegue(withIdentifier: "unwindToMyEvent", sender: self)
+        //self.performSegue(withIdentifier: "unwindToMyEvent", sender: self)
     }
     
     
