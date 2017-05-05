@@ -92,7 +92,6 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
                 for user in usersArray! {
                     addUserToList(user: user)
                 }
-
             }
         })
         
@@ -135,8 +134,8 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
                 //todo?
                 let uid = currentUser.id
                 let eid = event.eventId
-                var qrCode = QRCode(uid!)
-                print(uid!)
+                var qrCode = QRCode(eid)
+                //print(uid!)
                 qrCode?.color = CIColor.black()
                 qrCode?.size = CGSize(width: 300, height: 300)
                 //let dest = AttendingEventViewController()
@@ -155,7 +154,7 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
             }
             else if identifier == "dashToQREvent" {
                 if let dest = segue.destination as? AttendingEventViewController {
-                    print("xgop")
+                    //print("xgop")
                     dest.event = passingEvent
                     dest.image = passingImage!
                 }

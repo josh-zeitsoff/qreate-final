@@ -340,16 +340,26 @@
                                     <constraint firstAttribute="trailing" secondItem="ooR-Kc-tiC" secondAttribute="trailing" constant="325" id="npt-a5-1mC"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9P8-yp-hdf">
+                                <rect key="frame" x="0.0" y="524" width="375" height="35"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="9P8-yp-hdf" firstAttribute="width" secondItem="VhP-6i-CTQ" secondAttribute="width" id="CQL-Wt-cFG"/>
                             <constraint firstItem="VhP-6i-CTQ" firstAttribute="centerX" secondItem="eKP-Kv-ZGG" secondAttribute="centerX" id="KfQ-J3-28K"/>
                             <constraint firstItem="VhP-6i-CTQ" firstAttribute="width" secondItem="eKP-Kv-ZGG" secondAttribute="width" id="Tgn-Qr-McK"/>
                             <constraint firstItem="VhP-6i-CTQ" firstAttribute="height" secondItem="eKP-Kv-ZGG" secondAttribute="height" id="cXa-Wv-mCx"/>
+                            <constraint firstItem="9P8-yp-hdf" firstAttribute="top" secondItem="VhP-6i-CTQ" secondAttribute="bottom" constant="-143" id="i3u-w2-3rb"/>
                             <constraint firstItem="VhP-6i-CTQ" firstAttribute="centerY" secondItem="eKP-Kv-ZGG" secondAttribute="centerY" id="ieV-Be-2aN"/>
+                            <constraint firstItem="9P8-yp-hdf" firstAttribute="centerX" secondItem="VhP-6i-CTQ" secondAttribute="centerX" id="oPY-T2-f6J"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="label" destination="9P8-yp-hdf" id="w2l-rl-tkI"/>
                         <outlet property="previewView" destination="VhP-6i-CTQ" id="jps-oV-8t9"/>
                         <outlet property="view" destination="eKP-Kv-ZGG" id="YSC-02-IrO"/>
                     </connections>

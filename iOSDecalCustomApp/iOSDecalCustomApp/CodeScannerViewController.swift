@@ -15,8 +15,9 @@ class CodeScannervarwController: UIViewController {
     @IBOutlet var previewView: UIView!
     var scanner: MTBBarcodeScanner?
    
+    @IBOutlet weak var label: UILabel!
     @IBAction func backButton(_ sender: UIButton) {
-        updateInvites()
+        //updateInvites()
         //self.performSegue(withIdentifier: "backToEvent", sender: self)
     }
     
@@ -33,11 +34,9 @@ class CodeScannervarwController: UIViewController {
                 if let codes = codes {
                     for code in codes {
                         let stringValue = code.stringValue!
-                        print("Found code: \(stringValue)")
                         for inv in invites {
-                            if (inv.eventId == stringValue && inv.count != 1) {
-                                print("success")
-                                inv.count = inv.count + 1
+                            if (inv.eventId == stringValue) {
+                                self.label.text = "Status: Success! " + inv.username
                             }
                         }
                     }
