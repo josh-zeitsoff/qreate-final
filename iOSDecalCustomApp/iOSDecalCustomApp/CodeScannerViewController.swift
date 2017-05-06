@@ -15,6 +15,7 @@ class CodeScannervarwController: UIViewController {
     @IBOutlet var previewView: UIView!
     var scanner: MTBBarcodeScanner?
     var usersNamesOfPeopleThatAreHere : [String]?
+    var eid: String?
     
     @IBOutlet weak var label: UILabel!
     @IBAction func backButton(_ sender: UIButton) {
@@ -29,18 +30,24 @@ class CodeScannervarwController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
         super.viewDidAppear(animated)
         
         do {
             try self.scanner?.startScanning(resultBlock: { codes in
                 if let codes = codes {
                     for code in codes {
+                        
                         let stringValue = code.stringValue!
+                        let eventIndex = stringValue.index(stringValue.startIndex, offsetBy: 6)
+                        let userIndex = stringValue.index(stringValue.userIndex, offsetBy: 7)
+                        eid = stringValue.substring(to: eventIndex)
+                        let username = str.substring(from: userIndex)
+                        
                         for inv in invites {
-                            if (inv.eventId == stringValue) {
+                            if (inv.eventId == eid && inv.username == username && inv.present == "false") {
                                 self.label.text = "Status: Success! " + inv.username
                                 self.usersNamesOfPeopleThatAreHere?.append(inv.username)
+                                inv.present = "true"
                                 //tell database scanned
                             }
                         }
@@ -61,7 +68,8 @@ class CodeScannervarwController: UIViewController {
         if let identifier = segue.identifier {
             if identifier == "unwindToMyEvent" {
                 if let dest = segue.destination as? MyEventViewController {
-                    dest.whoHasCheckedIn = self.usersNamesOfPeopleThatAreHere
+                    dest.scanned[eid] += self.usersNamesOfPeopleThatAreHere
+                    //dest.whoHasCheckedIn = self.usersNamesOfPeopleThatAreHere
                 }
             }
         }

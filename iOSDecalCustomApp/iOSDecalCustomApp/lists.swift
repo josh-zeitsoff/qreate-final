@@ -92,7 +92,6 @@ func addInvite(eventId: String, username: String, present: String) {
         "username": username as AnyObject,
         "eventid": eventId as AnyObject,
         "present": present as AnyObject
-        
     ]
     dbRef.child(firInvitesNode).childByAutoId().setValue(dict)
 }

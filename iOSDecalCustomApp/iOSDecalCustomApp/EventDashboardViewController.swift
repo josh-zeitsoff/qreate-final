@@ -20,6 +20,7 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
         performSegue(withIdentifier: "dashToCreateEvent", sender: nil)
     }
     
+    var scanned : [String: [String]] = ["":[]]
     let currentUser = CurrentUser()
     
     var passingEvent : Event?
@@ -137,9 +138,9 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
                 performSegue(withIdentifier: "dashToMyEvent", sender: self)
             } else if eventType == "Invited To" {
                 //todo?
-                let uid = currentUser.id
+                let username = currentUser.username
                 let eid = event.eventId
-                var qrCode = QRCode(eid)
+                var qrCode = QRCode(eid + " " + username!)
                 //print(uid!)
                 qrCode?.color = CIColor.black()
                 qrCode?.size = CGSize(width: 300, height: 300)
