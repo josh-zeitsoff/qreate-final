@@ -67,7 +67,12 @@ class MyEventViewController: UIViewController {
                 if let dest = segue.destination as? WhosComingViewController {
                     dest.eventId = event?.eventId
                     //dest.whoHasCheckedIn = whoHasCheckedIn
+                    if (!attending.keys.contains((event?.eventId)!)) {
+                        attending[(event?.eventId)!] = [String]()
+                        
+                    }
                     dest.scanned = scanned
+                    dest.allInvited = attending
                 }
             }
             else if identifier == "myEventToChooseInvites" {

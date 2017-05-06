@@ -20,6 +20,8 @@ class WhosComingViewController: UIViewController, UITableViewDataSource, UITable
     
     var scanned : [String: [String]]?
     
+    var allInvited : [String: [String]]?
+    
     @IBOutlet weak var BackButton: UIButton!
     
     @IBOutlet weak var WhosComingTableView: UITableView!
@@ -42,9 +44,12 @@ class WhosComingViewController: UIViewController, UITableViewDataSource, UITable
         })
         
         for inv in invites {
+            
             if (inv.eventId == self.eventId!) {
                 //users is a map String -> User where the string is the userid
-                attending?.append(userDict[inv.username]!)
+                if (!(allInvited?[inv.eventId]?.contains(inv.username))!) {
+                    allInvited?[inv.eventId]?.append(inv.username)
+                }
                 if inv.present == "true" {
                     peopleHere?.append(true)
                 }
@@ -75,12 +80,12 @@ class WhosComingViewController: UIViewController, UITableViewDataSource, UITable
         else {
             cell.checkmark.text = "hello"
         }
-        cell.name.text = attending?[indexPath.row].username
+        cell.name.text = allInvited?[self.eventId!]![indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (attending?.count)!
+        return (allInvited?[self.eventId!]!.count)!
     }
     
 }
