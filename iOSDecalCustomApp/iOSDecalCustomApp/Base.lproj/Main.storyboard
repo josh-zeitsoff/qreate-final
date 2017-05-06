@@ -329,7 +329,7 @@
                                         <state key="normal" title="Back"/>
                                         <connections>
                                             <action selector="backButton:" destination="qxm-V3-GPS" eventType="touchUpInside" id="eKV-g7-UTu"/>
-                                            <segue destination="u2c-e8-j5T" kind="unwind" unwindAction="unwindToMyEventWithSegue:" id="w6r-PI-QPi"/>
+                                            <segue destination="u2c-e8-j5T" kind="unwind" identifier="unwindToMyEvent" unwindAction="unwindToMyEventWithSegue:" id="w6r-PI-QPi"/>
                                         </connections>
                                     </button>
                                 </subviews>

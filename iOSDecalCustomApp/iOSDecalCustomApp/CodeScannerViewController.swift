@@ -25,12 +25,12 @@ class CodeScannervarwController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         scanner = MTBBarcodeScanner(previewView: self.previewView)
+        self.usersNamesOfPeopleThatAreHere = [String]()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
-        usersNamesOfPeopleThatAreHere = [String]()
         
         do {
             try self.scanner?.startScanning(resultBlock: { codes in
@@ -59,9 +59,9 @@ class CodeScannervarwController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
-            if identifier == "unwindToWhosComing" {
-                if let dest = segue.destination as? WhosComingViewController {
-                    dest.whoHasCheckedIn = usersNamesOfPeopleThatAreHere
+            if identifier == "unwindToMyEvent" {
+                if let dest = segue.destination as? MyEventViewController {
+                    dest.whoHasCheckedIn = self.usersNamesOfPeopleThatAreHere
                 }
             }
         }
