@@ -11,11 +11,13 @@ import Firebase
 
 class ChooseInvitesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var users : [User]?
-    var toAttend = Set<String>()
+    //var toAttend = Set<String>()
     var event : Event?
+   // var allInvited : [String: [String]] = ["":[]]
     @IBOutlet weak var ChooseInvitesTableView: UITableView!
     
     @IBAction func invitePressed(_ sender: UIButton) {
+        
         //toAttend stuff
         //self.performSegue(withIdentifier: "unwindToMyEvent", sender: self)
     }
@@ -29,6 +31,14 @@ class ChooseInvitesViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
         ChooseInvitesTableView.delegate = self
         ChooseInvitesTableView.dataSource = self
+        //allInvited is nil initially
+//        if allInvited != nil {
+//            if (!(allInvited.keys.contains((self.event?.eventId)!))) {
+//                allInvited[(self.event?.eventId)!] = [String]()
+//            }
+//        } else {
+//        allInvited[(self.event?.eventId)!]! = [String]()
+//        }
         // Do any additional setup after loading the view.
     }
 
@@ -49,9 +59,28 @@ class ChooseInvitesViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        toAttend.insert((users?[indexPath.row].username)!)
-        addInvite(eventId: (event?.eventId)!, username: (users?[indexPath.row].username!)!, present: "false")
-        invites.append(Invites.init(eventID: (event?.eventId)!, userID: (users?[indexPath.row].username!)!, present: "false"))
+        let name : String = (users?[indexPath.row].username)!
+        var found = false
+        for inv in invites {
+            if (inv.eventId == event?.eventId && inv.username == name) {
+                found = true
+            }
+        }
+        if !found {
+            addInvite(eventId: (self.event?.eventId)!, username: (users?[indexPath.row].username!)!, present: "false")
+            invites.append(Invites.init(eventID: (self.event?.eventId)!, userID: (users?[indexPath.row].username!)!, present: "false"))
+        }
+        
+        
+        /*
+        if (!(allInvited[(self.event?.eventId)!]?.contains(name))!) {
+            allInvited[(self.event?.eventId)!]!.append(name)
+            addInvite(eventId: (self.event?.eventId)!, username: (users?[indexPath.row].username!)!, present: "false")
+            invites.append(Invites.init(eventID: (self.event?.eventId)!, userID: (users?[indexPath.row].username!)!, present: "false"))
+        }
+ */
+        //toAttend.insert((users?[indexPath.row].username)!)
+        
     }
     
     // MARK: - Navigation
