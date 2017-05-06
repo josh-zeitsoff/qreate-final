@@ -751,7 +751,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="72" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2js-MP-38I">
-                                <rect key="frame" x="0.0" y="10" width="375" height="567"/>
+                                <rect key="frame" x="0.0" y="40" width="375" height="537"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="chooseInviteesCell" rowHeight="72" id="j9Q-9M-hbo" customClass="ChooseInvitesTableViewCell" customModule="iOSDecalCustomApp" customModuleProvider="target">
@@ -803,7 +803,7 @@
                         <constraints>
                             <constraint firstItem="2js-MP-38I" firstAttribute="centerX" secondItem="w6o-1o-KOQ" secondAttribute="centerX" id="3wT-ta-eBc"/>
                             <constraint firstItem="dS8-sJ-tWd" firstAttribute="width" secondItem="w6o-1o-KOQ" secondAttribute="height" multiplier="97:667" id="Ct3-Q2-1Wd"/>
-                            <constraint firstItem="2js-MP-38I" firstAttribute="top" secondItem="w6o-1o-KOQ" secondAttribute="top" constant="10" id="SKZ-kp-fvK"/>
+                            <constraint firstItem="2js-MP-38I" firstAttribute="top" secondItem="w6o-1o-KOQ" secondAttribute="top" constant="40" id="SKZ-kp-fvK"/>
                             <constraint firstItem="jkj-ra-H5d" firstAttribute="top" secondItem="jEJ-z8-TYo" secondAttribute="bottom" constant="6" id="SyA-4w-Rc5"/>
                             <constraint firstItem="dS8-sJ-tWd" firstAttribute="top" secondItem="2js-MP-38I" secondAttribute="bottom" constant="28" id="TAi-Qt-Uuu"/>
                             <constraint firstItem="2js-MP-38I" firstAttribute="width" secondItem="w6o-1o-KOQ" secondAttribute="width" id="VZ5-Jh-xeu"/>
@@ -836,7 +836,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rSy-HG-XuE">
-                                <rect key="frame" x="0.0" y="30" width="375" height="637"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="607"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="whosComingTableViewCell" id="56L-1e-f1b" customClass="WhosComingTableViewCell" customModule="iOSDecalCustomApp" customModuleProvider="target">
@@ -852,16 +852,18 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QzS-xa-vyf">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QzS-xa-vyf">
                                                     <rect key="frame" x="49" y="2" width="59" height="33"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="QzS-xa-vyf" firstAttribute="leading" secondItem="zLv-ap-t5Y" secondAttribute="leadingMargin" constant="41" id="QRg-ED-DC7"/>
                                                 <constraint firstItem="htt-4k-Wfv" firstAttribute="centerX" secondItem="zLv-ap-t5Y" secondAttribute="centerX" id="XmF-Jt-vlS"/>
+                                                <constraint firstItem="QzS-xa-vyf" firstAttribute="centerX" secondItem="zLv-ap-t5Y" secondAttribute="centerX" id="ZNX-Ty-X96"/>
+                                                <constraint firstItem="QzS-xa-vyf" firstAttribute="centerY" secondItem="zLv-ap-t5Y" secondAttribute="centerY" id="cp7-Sg-5I8"/>
                                                 <constraint firstItem="htt-4k-Wfv" firstAttribute="centerY" secondItem="zLv-ap-t5Y" secondAttribute="centerY" id="cwQ-JF-Gi9"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -886,7 +888,7 @@
                         <constraints>
                             <constraint firstItem="bIl-ah-Djv" firstAttribute="top" secondItem="fxD-Ae-Fvx" secondAttribute="bottom" constant="6" id="9Dz-Vs-Te7"/>
                             <constraint firstItem="rSy-HG-XuE" firstAttribute="leading" secondItem="Aqk-iE-CAE" secondAttribute="leading" id="Jh0-sf-2J5"/>
-                            <constraint firstItem="rSy-HG-XuE" firstAttribute="top" secondItem="fxD-Ae-Fvx" secondAttribute="bottom" constant="10" id="PsZ-q7-G9l"/>
+                            <constraint firstItem="rSy-HG-XuE" firstAttribute="top" secondItem="fxD-Ae-Fvx" secondAttribute="bottom" constant="40" id="PsZ-q7-G9l"/>
                             <constraint firstAttribute="leadingMargin" secondItem="bIl-ah-Djv" secondAttribute="leading" constant="-6" id="ZNd-R3-INa"/>
                             <constraint firstItem="F8v-SD-e7e" firstAttribute="top" secondItem="rSy-HG-XuE" secondAttribute="bottom" id="aXl-VQ-KXx"/>
                             <constraint firstItem="rSy-HG-XuE" firstAttribute="centerX" secondItem="Aqk-iE-CAE" secondAttribute="centerX" id="hoi-mg-smD"/>

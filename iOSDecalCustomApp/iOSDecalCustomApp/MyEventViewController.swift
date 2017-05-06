@@ -47,9 +47,9 @@ class MyEventViewController: UIViewController {
         super.viewDidLoad()
         for e in events["Current Events"]! {
             if e.eventId == event?.eventId {
-                EventName.text = e.name
-                EventLocation.text = e.location
-                EventDate.text = e.date
+                EventName.text = "Name: " + e.name
+                EventLocation.text = "Location: " + e.location
+                EventDate.text = "Date and Time: " + e.date
             }
         }
 

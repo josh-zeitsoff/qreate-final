@@ -71,7 +71,8 @@ class CreateEventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        EventDateAndTimePicker.minimumDate = Date() 
+        
         // Do any additional setup after loading the view.
         self.hideKeyboard()
     }

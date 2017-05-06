@@ -73,12 +73,12 @@ class WhosComingViewController: UIViewController, UITableViewDataSource, UITable
                     cell.checkmark.text = "\u{2714}"
                 }
                 else {
-                    cell.checkmark.text = "hello"
+                    cell.checkmark.text = "\u{25EF}"
                 }
             }
         }
         else {
-            cell.checkmark.text = "hello"
+            cell.checkmark.text = "\u{25EF}"
         }
         cell.name.text = allInvited?[self.eventId!]![indexPath.row]
         return cell

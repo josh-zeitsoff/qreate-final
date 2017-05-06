@@ -14,9 +14,15 @@ class ChooseInvitesViewController: UIViewController, UITableViewDelegate, UITabl
     //var toAttend = Set<String>()
     var event : Event?
    // var allInvited : [String: [String]] = ["":[]]
+    var toInvite = [String]()
+    
     @IBOutlet weak var ChooseInvitesTableView: UITableView!
     
     @IBAction func invitePressed(_ sender: UIButton) {
+        for person in toInvite {
+            addInvite(eventId: (self.event?.eventId)!, username: person, present: "false")
+            invites.append(Invites.init(eventID: (self.event?.eventId)!, userID: person, present: "false"))
+        }
         
         //toAttend stuff
         //self.performSegue(withIdentifier: "unwindToMyEvent", sender: self)
@@ -60,16 +66,33 @@ class ChooseInvitesViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let name : String = (users?[indexPath.row].username)!
-        var found = false
-        for inv in invites {
-            if (inv.eventId == event?.eventId && inv.username == name) {
-                found = true
+        if let cell = tableView.cellForRow(at: indexPath) {
+//            if cell.isSelected {
+//                cell.accessoryType = .checkmark
+//            }
+            if cell.accessoryType == .none {
+                cell.accessoryType = .checkmark
+                var found = false
+                for inv in invites {
+                    if (inv.eventId == event?.eventId && inv.username == name) {
+                        found = true
+                    }
+                }
+                if !found {
+                    toInvite.append((users?[indexPath.row].username!)!)
+                }
+            }
+            else {
+                cell.accessoryType = .none
+                if toInvite.contains(name) {
+                    if let index = toInvite.index(of : name) {
+                        toInvite.remove(at: index)
+                    }
+                }
             }
         }
-        if !found {
-            addInvite(eventId: (self.event?.eventId)!, username: (users?[indexPath.row].username!)!, present: "false")
-            invites.append(Invites.init(eventID: (self.event?.eventId)!, userID: (users?[indexPath.row].username!)!, present: "false"))
-        }
+        
+        
         
         
         /*
@@ -82,6 +105,8 @@ class ChooseInvitesViewController: UIViewController, UITableViewDelegate, UITabl
         //toAttend.insert((users?[indexPath.row].username)!)
         
     }
+    
+
     
     // MARK: - Navigation
 

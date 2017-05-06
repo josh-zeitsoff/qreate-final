@@ -24,6 +24,7 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
     let currentUser = CurrentUser()
     var passingEvent : Event?
     var passingImage : UIImage?
+    var refreshControl = UIRefreshControl()
     
     
     @IBAction func signOut(_ sender: UIButton) {
@@ -45,9 +46,18 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
         EventDashboardTableView.delegate = self
         EventDashboardTableView.dataSource = self
+        EventDashboardTableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(EventDashboardViewController.refreshData(sender:)), for: .valueChanged)
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching events ...")
+        refreshControl.tintColor = UIColor(red:0.50, green: 0.30, blue:0.40, alpha: 1.0)
         // Do any additional setup after loading the view.
-
     }
+    
+    func refreshData(sender: Any) {
+        updateData()
+        self.refreshControl.endRefreshing()
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         updateData()

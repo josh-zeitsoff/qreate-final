@@ -36,11 +36,12 @@ class AttendingEventViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         MyQRCode?.image = image
-        AttendingEventDate?.text = event?.date
-        AttendingEventLocation?.text = event?.location
-        AttendingEventName?.text = event?.name
-        AttendingEventHost?.text = event?.host
+        AttendingEventDate?.text = "Date and Time: " + (event?.date)!
+        AttendingEventLocation?.text = "Location: " + (event?.location)!
+        AttendingEventName?.text = "Name: " + (event?.name)!
+        AttendingEventHost?.text = "Host: " + (event?.host)!
 
+        
     }
 
     override func didReceiveMemoryWarning() {
