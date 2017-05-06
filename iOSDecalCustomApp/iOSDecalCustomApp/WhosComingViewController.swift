@@ -60,11 +60,15 @@ class WhosComingViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = WhosComingTableView.dequeueReusableCell(withIdentifier: "whosComingTableViewCell") as! WhosComingTableViewCell
-        if (whoHasCheckedIn?.contains((attending?[indexPath.row].username)!))! {
+        if whoHasCheckedIn != nil {
+            if (whoHasCheckedIn?.contains((attending?[indexPath.row].username)!))! {
                 cell.checkmark.text = "\u{2714}"
             }
-        else {
-         cell.checkmark.text = "hello"
+            else {
+                cell.checkmark.text = "hello"
+            }
+        } else {
+            cell.checkmark.text = "hello"
         }
         cell.name.text = attending?[indexPath.row].username
         return cell
