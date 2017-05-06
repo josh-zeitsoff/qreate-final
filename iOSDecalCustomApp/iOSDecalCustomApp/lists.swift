@@ -101,10 +101,10 @@ func addUser(userid: String, username: String, email: String, password: String) 
     let dbRef = FIRDatabase.database().reference()
     
     let dict: [String:AnyObject] = [
-        "name": username as AnyObject
+        //"name": username as AnyObject
         //"userid": userid as AnyObject,
         //"username": username as AnyObject,
-        //"email": email as AnyObject,
+        "name": email as AnyObject,
         //"password" : password as AnyObject
     ]
     dbRef.child(firUsersNode).childByAutoId().setValue(dict)
@@ -120,7 +120,7 @@ func getInvites(completion: @escaping ([Invites]?) -> Void) {
                 for key in invitesDict.keys {
                     let userid = invitesDict[key]?["username"] as! String
                     let eventid = invitesDict[key]?["eventid"] as! String
-                    var present = invitesDict[key]?["present"] as! String
+                    let present = invitesDict[key]?["present"] as! String
                     let invite = Invites.init(eventID: eventid, userID: userid, present: present)
                     inviteArray.append(invite)
                     }

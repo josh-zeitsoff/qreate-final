@@ -40,6 +40,7 @@ class SignUpViewController: UIViewController {
             FIRAuth.auth()?.createUser(withEmail: (EmailInput.text!), password: (PasswordSignUpInput?.text!)!) { (user, error) in
                 if error == nil {
                     addUser(userid: (user?.uid)!, username: self.UserNameSignUpInput!.text!, email: self.EmailInput!.text!, password: self.PasswordSignUpInput!.text!)
+                    
                     let changeRequest = user!.profileChangeRequest()
                     changeRequest.displayName = self.UserNameSignUpInput?.text
                     changeRequest.commitChanges(completion: {

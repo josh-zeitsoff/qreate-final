@@ -62,6 +62,18 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
         //clears events, invites, and users lists
         clearAll()
         
+        //add all users to user list
+        
+        getUsers(completion: {
+            (usersArray) in
+            if usersArray != nil {
+                for user in usersArray! {
+                    addUserToList(user: user)
+                }
+                self.EventDashboardTableView.reloadData()
+            }
+        })
+        
         //adds all invites to the invites list
         getInvites(completion: {
             (inviteArray) in
@@ -86,16 +98,7 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
         
         
 
-        //add all users to user list
         
-        getUsers(completion: {
-            (usersArray) in
-            if usersArray != nil {
-                for user in usersArray! {
-                    addUserToList(user: user)
-                }
-            }
-        })
         
         
         
