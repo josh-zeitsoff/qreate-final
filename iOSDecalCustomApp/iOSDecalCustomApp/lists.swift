@@ -40,10 +40,13 @@ func addEventToList(event: Event, user: CurrentUser) {
     if event.host == user.username {
         events["Current Events"]!.append(event)
     }
-    else {
-        events["Invited To"]!.append(event)
+    for inv in invites {
+        if inv.eventId == event.eventId {
+            if inv.username == user.username {
+                events["Invited To"]!.append(event)
+            }
+        }
     }
-    
 }
 
 func clearAll() {
