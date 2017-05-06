@@ -12,7 +12,7 @@ class Invites {
     
     let eventId: String
     let username: String
-    let present: String
+    var present: String
     
     init(eventID: String, userID: String, present: String) {
         self.eventId = eventID

@@ -47,8 +47,6 @@ class WhosComingViewController: UIViewController, UITableViewDataSource, UITable
                 else {
                     peopleHere?.append(false)
                 }
-                
-            
             }
         }
     }
