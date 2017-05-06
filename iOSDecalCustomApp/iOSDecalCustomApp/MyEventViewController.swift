@@ -26,6 +26,7 @@ class MyEventViewController: UIViewController {
     var numAttending: String?
     var whoHasCheckedIn : [String]?
     var scanned : [String: [String]] = ["":[]]
+    var attending : [String : [String]] = ["":[]]
     
     @IBAction func SeeWhosComingButton(_ sender: Any) {
         performSegue(withIdentifier: "myEventToWhosComing", sender: nil)

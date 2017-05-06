@@ -11,7 +11,7 @@ import Firebase
 
 class ChooseInvitesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var users : [User]?
-    var toAttend: [User] = []
+    var toAttend = Set<String>()
     var event : Event?
     @IBOutlet weak var ChooseInvitesTableView: UITableView!
     
@@ -49,7 +49,7 @@ class ChooseInvitesViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        toAttend.append((users?[indexPath.row])!)
+        toAttend.insert((users?[indexPath.row].username)!)
         addInvite(eventId: (event?.eventId)!, username: (users?[indexPath.row].username!)!, present: "false")
         invites.append(Invites.init(eventID: (event?.eventId)!, userID: (users?[indexPath.row].username!)!, present: "false"))
     }
