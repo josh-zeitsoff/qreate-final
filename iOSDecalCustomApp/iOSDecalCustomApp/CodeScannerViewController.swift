@@ -14,7 +14,8 @@ class CodeScannervarwController: UIViewController {
     
     @IBOutlet var previewView: UIView!
     var scanner: MTBBarcodeScanner?
-   
+    var usersNamesOfPeopleThatAreHere : [String]?
+    
     @IBOutlet weak var label: UILabel!
     @IBAction func backButton(_ sender: UIButton) {
         //updateInvites()
@@ -27,7 +28,9 @@ class CodeScannervarwController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
         super.viewDidAppear(animated)
+        usersNamesOfPeopleThatAreHere = [String]()
         
         do {
             try self.scanner?.startScanning(resultBlock: { codes in
@@ -37,7 +40,7 @@ class CodeScannervarwController: UIViewController {
                         for inv in invites {
                             if (inv.eventId == stringValue) {
                                 self.label.text = "Status: Success! " + inv.username
-                                inv.present = "true"
+                                self.usersNamesOfPeopleThatAreHere?.append(inv.username)
                                 //tell database scanned
                             }
                         }
@@ -52,5 +55,15 @@ class CodeScannervarwController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            if identifier == "unwindToWhosComing" {
+                if let dest = segue.destination as? WhosComingViewController {
+                    dest.whoHasCheckedIn = usersNamesOfPeopleThatAreHere
+                }
+            }
+        }
     }
 }
