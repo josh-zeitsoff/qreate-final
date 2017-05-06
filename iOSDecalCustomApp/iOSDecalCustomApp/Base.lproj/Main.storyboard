@@ -852,6 +852,13 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QzS-xa-vyf">
+                                                    <rect key="frame" x="49" y="2" width="59" height="33"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="htt-4k-Wfv" firstAttribute="centerX" secondItem="zLv-ap-t5Y" secondAttribute="centerX" id="XmF-Jt-vlS"/>
@@ -859,6 +866,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="checkmark" destination="QzS-xa-vyf" id="kLb-Sl-3eG"/>
                                             <outlet property="name" destination="htt-4k-Wfv" id="l8O-yw-x12"/>
                                         </connections>
                                     </tableViewCell>
@@ -892,7 +900,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B8S-jD-Hq3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="KlN-a3-dtO" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2904.5" y="437.5"/>
+            <point key="canvasLocation" x="2903.1999999999998" y="436.73163418290858"/>
         </scene>
     </scenes>
 </document>

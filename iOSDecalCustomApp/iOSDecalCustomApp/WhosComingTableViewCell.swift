@@ -10,6 +10,7 @@ import UIKit
 
 class WhosComingTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var checkmark: UILabel!
     @IBOutlet weak var name: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()

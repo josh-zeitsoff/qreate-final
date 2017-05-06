@@ -50,8 +50,8 @@ class ChooseInvitesViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         toAttend.append((users?[indexPath.row])!)
-        addInvite(eventId: (event?.eventId)!, username: (users?[indexPath.row].username!)!, count: 0)
-        invites.append(Invites.init(eventID: (event?.eventId)!, userID: (users?[indexPath.row].username!)!, count: 0))
+        addInvite(eventId: (event?.eventId)!, username: (users?[indexPath.row].username!)!, present: "false")
+        invites.append(Invites.init(eventID: (event?.eventId)!, userID: (users?[indexPath.row].username!)!, present: "false"))
     }
     
     // MARK: - Navigation

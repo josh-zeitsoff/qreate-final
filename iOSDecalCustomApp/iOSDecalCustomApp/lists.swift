@@ -1,4 +1,4 @@
-//
+ //
 //  lists.swift
 //  iOSDecalCustomApp
 //
@@ -19,7 +19,7 @@ var invites : [Invites] = []
 
 var users: [User]?
 
-
+/*
 func updateInvites() {
     let dbRef = FIRDatabase.database().reference()
     var count = 0
@@ -34,6 +34,7 @@ func updateInvites() {
     }
     dbRef.child(firInvitesNode).setValue(dict)
 }
+ */
 
 func addEventToList(event: Event, user: CurrentUser) {
     if event.host == user.username {
@@ -82,12 +83,13 @@ func getPerson(indexPath: IndexPath) -> String? {
     return nil
 }
 
-func addInvite(eventId: String, username: String, count: Int) {
+func addInvite(eventId: String, username: String, present: String) {
     let dbRef = FIRDatabase.database().reference()
     let dict: [String:AnyObject] = [
         "username": username as AnyObject,
         "eventid": eventId as AnyObject,
-        "count": count as Int as AnyObject
+        "present": present as AnyObject
+        
     ]
     dbRef.child(firInvitesNode).childByAutoId().setValue(dict)
 }
@@ -115,8 +117,8 @@ func getInvites(completion: @escaping ([Invites]?) -> Void) {
                 for key in invitesDict.keys {
                     let userid = invitesDict[key]?["username"] as! String
                     let eventid = invitesDict[key]?["eventid"] as! String
-                    let count = invitesDict[key]?["count"] as! Int
-                    let invite = Invites.init(eventID: eventid, userID: userid, count: Int(count))
+                    var present = invitesDict[key]?["present"] as! String
+                    let invite = Invites.init(eventID: eventid, userID: userid, present: present)
                     inviteArray.append(invite)
                     }
                 }
@@ -140,8 +142,8 @@ func getUserInvites(user: CurrentUser, completion: @escaping ([Invites]?) -> Voi
                     let userid = invitesDict[key]?["userid"] as! String
                     if (userid == user.id) {
                         let eventid = invitesDict[key]?["eventid"] as! String
-                        let count = invitesDict[key]?["count"] as! String
-                        let invite = Invites.init(eventID: eventid, userID: userid, count: Int(count)!)
+                        let present = invitesDict[key]?["present"] as! String
+                        let invite = Invites.init(eventID: eventid, userID: userid, present: present)
                         inviteArray.append(invite)
                     }
                 }

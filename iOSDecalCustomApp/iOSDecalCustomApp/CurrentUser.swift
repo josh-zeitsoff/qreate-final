@@ -54,7 +54,7 @@ class CurrentUser {
     
     func addNewInvitedEvent(eventId: String) {
         var dict = [String : String]()
-        dict["count"] = "0"
+        dict["present"] = "false"
         dict["userid"] = id!
         dict["eventid"] = eventId
         

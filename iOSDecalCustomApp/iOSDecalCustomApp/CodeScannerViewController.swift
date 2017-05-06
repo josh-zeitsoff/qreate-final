@@ -37,6 +37,7 @@ class CodeScannervarwController: UIViewController {
                         for inv in invites {
                             if (inv.eventId == stringValue) {
                                 self.label.text = "Status: Success! " + inv.username
+                                //tell database scanned
                             }
                         }
                     }

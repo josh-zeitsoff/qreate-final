@@ -14,6 +14,8 @@ class WhosComingViewController: UIViewController, UITableViewDataSource, UITable
 
     var attending : [User]?
     
+    var peopleHere: [Bool]?
+    
     @IBOutlet weak var BackButton: UIButton!
     
     @IBOutlet weak var WhosComingTableView: UITableView!
@@ -27,6 +29,7 @@ class WhosComingViewController: UIViewController, UITableViewDataSource, UITable
         WhosComingTableView.dataSource = self
         WhosComingTableView.delegate = self
         attending = [User]()
+        peopleHere = [Bool]()
 
         // Do any additional setup after loading the view.
         //invites is an array of invites to be defined in lists.swift
@@ -38,6 +41,14 @@ class WhosComingViewController: UIViewController, UITableViewDataSource, UITable
             if (inv.eventId == self.eventId!) {
                 //users is a map String -> User where the string is the userid
                 attending?.append(userDict[inv.username]!)
+                if inv.present == "true" {
+                    peopleHere?.append(true)
+                }
+                else {
+                    peopleHere?.append(false)
+                }
+                
+            
             }
         }
     }
@@ -49,9 +60,13 @@ class WhosComingViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = WhosComingTableView.dequeueReusableCell(withIdentifier: "whosComingTableViewCell") as! WhosComingTableViewCell
-        
+        if (peopleHere?[indexPath.row])! {
+          cell.checkmark.text = "\u{2714}"
+        }
+        else {
+            cell.checkmark.text = "hello"
+        }
         cell.name.text = attending?[indexPath.row].username
-        
         return cell
     }
     
