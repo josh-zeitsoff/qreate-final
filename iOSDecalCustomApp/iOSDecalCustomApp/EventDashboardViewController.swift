@@ -20,9 +20,8 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
         performSegue(withIdentifier: "dashToCreateEvent", sender: nil)
     }
     
-    var scanned : [String: [String]] = ["":[]]
-    let currentUser = CurrentUser()
     
+    let currentUser = CurrentUser()
     var passingEvent : Event?
     var passingImage : UIImage?
     

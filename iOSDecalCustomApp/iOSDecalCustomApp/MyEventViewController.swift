@@ -25,6 +25,7 @@ class MyEventViewController: UIViewController {
     var event: Event?
     var numAttending: String?
     var whoHasCheckedIn : [String]?
+    var scanned : [String: [String]] = ["":[]]
     
     @IBAction func SeeWhosComingButton(_ sender: Any) {
         performSegue(withIdentifier: "myEventToWhosComing", sender: nil)
@@ -64,7 +65,8 @@ class MyEventViewController: UIViewController {
             if identifier == "myEventToWhosComing" {
                 if let dest = segue.destination as? WhosComingViewController {
                     dest.eventId = event?.eventId
-                    dest.whoHasCheckedIn = whoHasCheckedIn
+                    //dest.whoHasCheckedIn = whoHasCheckedIn
+                    dest.scanned = scanned
                 }
             }
             else if identifier == "myEventToChooseInvites" {

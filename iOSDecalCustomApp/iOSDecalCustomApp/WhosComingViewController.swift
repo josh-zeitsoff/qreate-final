@@ -18,6 +18,8 @@ class WhosComingViewController: UIViewController, UITableViewDataSource, UITable
     
     var whoHasCheckedIn : [String]?
     
+    var scanned : [String: [String]]?
+    
     @IBOutlet weak var BackButton: UIButton!
     
     @IBOutlet weak var WhosComingTableView: UITableView!
@@ -60,14 +62,17 @@ class WhosComingViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = WhosComingTableView.dequeueReusableCell(withIdentifier: "whosComingTableViewCell") as! WhosComingTableViewCell
-        if whoHasCheckedIn != nil {
-            if (whoHasCheckedIn?.contains((attending?[indexPath.row].username)!))! {
-                cell.checkmark.text = "\u{2714}"
+        if (scanned?.keys.contains(eventId!))! {
+            if scanned?[eventId!] != nil {
+                if (scanned?[eventId!]?.contains((attending?[indexPath.row].username)!))! {
+                    cell.checkmark.text = "\u{2714}"
+                }
+                else {
+                    cell.checkmark.text = "hello"
+                }
             }
-            else {
-                cell.checkmark.text = "hello"
-            }
-        } else {
+        }
+        else {
             cell.checkmark.text = "hello"
         }
         cell.name.text = attending?[indexPath.row].username

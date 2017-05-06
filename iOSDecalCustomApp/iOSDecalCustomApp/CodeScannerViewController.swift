@@ -39,12 +39,12 @@ class CodeScannervarwController: UIViewController {
                         
                         let stringValue = code.stringValue!
                         let eventIndex = stringValue.index(stringValue.startIndex, offsetBy: 6)
-                        let userIndex = stringValue.index(stringValue.userIndex, offsetBy: 7)
-                        eid = stringValue.substring(to: eventIndex)
-                        let username = str.substring(from: userIndex)
+                        let userIndex = stringValue.index(stringValue.startIndex, offsetBy: 7)
+                        self.eid = stringValue.substring(to: eventIndex)
+                        let username = stringValue.substring(from: userIndex)
                         
                         for inv in invites {
-                            if (inv.eventId == eid && inv.username == username && inv.present == "false") {
+                            if (inv.eventId == self.eid && inv.username == username && inv.present == "false") {
                                 self.label.text = "Status: Success! " + inv.username
                                 self.usersNamesOfPeopleThatAreHere?.append(inv.username)
                                 inv.present = "true"
@@ -68,7 +68,12 @@ class CodeScannervarwController: UIViewController {
         if let identifier = segue.identifier {
             if identifier == "unwindToMyEvent" {
                 if let dest = segue.destination as? MyEventViewController {
-                    dest.scanned[eid] += self.usersNamesOfPeopleThatAreHere
+                    if dest.scanned.keys.contains(eid!) {
+                        dest.scanned[eid!]! += self.usersNamesOfPeopleThatAreHere!
+                    } else {
+                        dest.scanned[eid!] = self.usersNamesOfPeopleThatAreHere
+                    }
+                    
                     //dest.whoHasCheckedIn = self.usersNamesOfPeopleThatAreHere
                 }
             }
