@@ -24,7 +24,7 @@ class SignUpViewController: UIViewController {
     
 
     @IBAction func BackButton(_ sender: Any) {
-        self.performSegue(withIdentifier: "unwindToLogin", sender: self)
+        //self.performSegue(withIdentifier: "unwindToLogin", sender: self)
     }
     
     @IBAction func RegisterButton(_ sender: Any) {
@@ -47,9 +47,9 @@ class SignUpViewController: UIViewController {
                     (err) in
                         if let err = err {
                         print(err)}
-                        else {
-                         self.performSegue(withIdentifier: "unwindToLogin", sender: self)
-                        }
+//                        else {
+//                         self.performSegue(withIdentifier: "unwindToLogin", sender: self)
+//                        }
                     })
                     
                     //print("You have successfully signed up")
