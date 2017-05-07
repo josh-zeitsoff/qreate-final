@@ -35,6 +35,46 @@ func updateInvites() {
     dbRef.child(firInvitesNode).setValue(dict)
 }
  */
+ 
+func eventDateToString(eventDate: String) -> String {
+    var dateComponent = DateComponents()
+    //get month
+    let monthIndex = eventDate.index(eventDate.startIndex, offsetBy: 2)
+    let monthString = eventDate.substring(to: monthIndex)
+    let month = Int(monthString)
+ 
+    //get day
+    let dayIndex1 = eventDate.index(eventDate.startIndex, offsetBy:3)
+    let dayRest = eventDate.substring(from: dayIndex1)
+    let dayIndex2 = dayRest.index(dayRest.startIndex, offsetBy: 2)
+    let dayString = dayRest.substring(to: dayIndex2)
+    let day = Int(dayString)
+
+    //get year
+    let yearIndex1 = eventDate.index(eventDate.startIndex, offsetBy:6)
+    let yearRest = eventDate.substring(from: yearIndex1)
+    let yearIndex2 = yearRest.index(yearRest.startIndex, offsetBy: 2)
+    let yearString = yearRest.substring(to: yearIndex2)
+    let year = Int("20" + yearString)
+
+ 
+    dateComponent.month = month
+    dateComponent.day = day
+    dateComponent.year = year
+    
+    let dateDate = Calendar.current.date(from: dateComponent)
+    
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "MMMM dd, yyyy"
+    let stringDate = dateFormatter.string(from: dateDate!)
+    
+    
+    return stringDate
+ 
+ 
+ 
+ 
+ }
 
 func addEventToList(event: Event, user: CurrentUser) {
     if event.host == user.username {

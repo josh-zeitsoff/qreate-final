@@ -131,7 +131,7 @@ class EventDashboardViewController: UIViewController, UITableViewDelegate, UITab
         if let event = getEventFromIndexPath(indexPath: indexPath) {
             
             cell.EventName.text = event.name
-            cell.EventDate.text = String(describing: event.date)
+            cell.EventDate.text = eventDateToString(eventDate: event.date) 
         }
         return cell
     }

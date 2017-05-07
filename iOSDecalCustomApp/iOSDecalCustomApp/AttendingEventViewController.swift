@@ -36,7 +36,7 @@ class AttendingEventViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         MyQRCode?.image = image
-        AttendingEventDate?.text = "Date and Time: " + (event?.date)!
+        AttendingEventDate?.text = "Date and Time: " + eventDateToString(eventDate: (event?.date)!)
         AttendingEventLocation?.text = "Location: " + (event?.location)!
         AttendingEventName?.text = "Name: " + (event?.name)!
         AttendingEventHost?.text = "Host: " + (event?.host)!
