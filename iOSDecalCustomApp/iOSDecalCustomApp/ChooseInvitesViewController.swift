@@ -20,8 +20,8 @@ class ChooseInvitesViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBAction func invitePressed(_ sender: UIButton) {
         for person in toInvite {
-            addInvite(eventId: (self.event?.eventId)!, username: person, present: "false")
-            invites.append(Invites.init(eventID: (self.event?.eventId)!, userID: person, present: "false"))
+            let key = addInvite(eventId: (self.event?.eventId)!, username: person, present: "false")
+            invites.append(Invites.init(eventID: (self.event?.eventId)!, userID: person, present: "false", key: key))
         }
         
         //toAttend stuff

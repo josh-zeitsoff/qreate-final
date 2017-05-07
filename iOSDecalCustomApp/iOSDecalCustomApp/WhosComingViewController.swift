@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class WhosComingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -31,6 +32,8 @@ class WhosComingViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     override func viewDidLoad() {
+        let dbRef = FIRDatabase.database().reference().child(firInvitesNode)
+        
         super.viewDidLoad()
         WhosComingTableView.dataSource = self
         WhosComingTableView.delegate = self
@@ -45,13 +48,22 @@ class WhosComingViewController: UIViewController, UITableViewDataSource, UITable
         })
         
         for inv in invites {
-            
+            var present: String?
             if (inv.eventId == self.eventId!) {
                 //users is a map String -> User where the string is the userid
                 if (!(allInvited?[inv.eventId]?.contains(inv.username))!) {
                     allInvited?[inv.eventId]?.append(inv.username)
                 }
-                if inv.present == "true" {
+                dbRef.child(inv.key).observeSingleEvent(of: .value, with: {
+                    (snapshot) in
+                    if snapshot.exists() {
+                        if let invitesDict = snapshot.value as? [String : AnyObject] {
+                                present = invitesDict["present"] as! String
+                        }
+                    }
+    
+                })
+                if present == "true" {
                     peopleHere?.append(true)
                 }
                 else {

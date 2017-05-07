@@ -16,7 +16,7 @@ var events: [String: [Event]] = ["Current Events": [], "Invited To": []]
 let eventTypes = ["Current Events", "Invited To"]
 var userDict : [String: User] = [:]
 var invites : [Invites] = []
-
+var inviteIDs : [String] = []
 var users: [User]?
 
 /*
@@ -126,14 +126,18 @@ func getPerson(indexPath: IndexPath) -> String? {
     return nil
 }
 
-func addInvite(eventId: String, username: String, present: String) {
+ func addInvite(eventId: String, username: String, present: String) -> String{
     let dbRef = FIRDatabase.database().reference()
+    let key = dbRef.child(firInvitesNode).childByAutoId().key
     let dict: [String:AnyObject] = [
         "username": username as AnyObject,
         "eventid": eventId as AnyObject,
-        "present": present as AnyObject
+        "present": present as AnyObject,
+        "key": key as AnyObject
     ]
-    dbRef.child(firInvitesNode).childByAutoId().setValue(dict)
+    dbRef.child(firInvitesNode).child(key).setValue(dict )
+    inviteIDs.append(key)
+    return key
 }
 
 func addUser(userid: String, username: String, email: String, password: String) {
@@ -160,7 +164,8 @@ func getInvites(completion: @escaping ([Invites]?) -> Void) {
                     let userid = invitesDict[key]?["username"] as! String
                     let eventid = invitesDict[key]?["eventid"] as! String
                     let present = invitesDict[key]?["present"] as! String
-                    let invite = Invites.init(eventID: eventid, userID: userid, present: present)
+                    let key = invitesDict[key]?["key"] as! String
+                    let invite = Invites.init(eventID: eventid, userID: userid, present: present, key: key)
                     inviteArray.append(invite)
                     }
                 }
@@ -173,30 +178,7 @@ func getInvites(completion: @escaping ([Invites]?) -> Void) {
 }
 
 
-func getUserInvites(user: CurrentUser, completion: @escaping ([Invites]?) -> Void) {
-    let dbRef = FIRDatabase.database().reference()
-    var inviteArray: [Invites] = []
-    dbRef.child(firInvitesNode).observeSingleEvent(of: .value, with: {
-        (snapshot) in
-        if snapshot.exists() {
-            if let invitesDict = snapshot.value as? [String : AnyObject] {
-                for key in invitesDict.keys {
-                    let userid = invitesDict[key]?["userid"] as! String
-                    if (userid == user.id) {
-                        let eventid = invitesDict[key]?["eventid"] as! String
-                        let present = invitesDict[key]?["present"] as! String
-                        let invite = Invites.init(eventID: eventid, userID: userid, present: present)
-                        inviteArray.append(invite)
-                    }
-                }
-                completion(inviteArray)
-            }
-        }
-        else {
-            completion(nil)
-        }
-    })
-}
+
 
 func getUsers(completion: @escaping ([User]?) -> Void) {
     let dbRef = FIRDatabase.database().reference()

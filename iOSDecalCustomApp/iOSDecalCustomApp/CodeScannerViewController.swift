@@ -30,6 +30,7 @@ class CodeScannervarwController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        let dbRef = FIRDatabase.database().reference().child(firInvitesNode)
         super.viewDidAppear(animated)
         
         do {
@@ -56,6 +57,13 @@ class CodeScannervarwController: UIViewController {
                                 //self.label.text = "Status: Success! " + inv.username
                                 self.usersNamesOfPeopleThatAreHere?.append(inv.username)
                                 inv.present = "true"
+                                for key in inviteIDs {
+                                    if inv.key == key {
+                                        dbRef.updateChildValues([
+                                            "present": "true"
+                                            ])
+                                    }
+                                }
                                 //tell database scanned
                             }
                             else if (inv.eventId == self.eid && inv.username == username && inv.present == "true") {
