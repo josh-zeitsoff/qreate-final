@@ -35,9 +35,9 @@ class MyEventViewController: UIViewController {
     @IBAction func inviteButtonPressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: "myEventToChooseInvites", sender: self)
     }
-    @IBOutlet weak var FractionAttending: UILabel!
+    
     @IBAction func ScanCodesButton(_ sender: Any) {
-        performSegue(withIdentifier: "myEventToCamera", sender: nil)
+        self.performSegue(withIdentifier: "myEventToCamera", sender: self)
     }
     
     @IBAction func unwindToMyEvent(segue:UIStoryboardSegue) {

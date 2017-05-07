@@ -341,26 +341,16 @@
                                     <constraint firstAttribute="trailing" secondItem="ooR-Kc-tiC" secondAttribute="trailing" constant="325" id="npt-a5-1mC"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9P8-yp-hdf">
-                                <rect key="frame" x="0.0" y="524" width="375" height="35"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="9P8-yp-hdf" firstAttribute="width" secondItem="VhP-6i-CTQ" secondAttribute="width" id="CQL-Wt-cFG"/>
                             <constraint firstItem="VhP-6i-CTQ" firstAttribute="centerX" secondItem="eKP-Kv-ZGG" secondAttribute="centerX" id="KfQ-J3-28K"/>
                             <constraint firstItem="VhP-6i-CTQ" firstAttribute="width" secondItem="eKP-Kv-ZGG" secondAttribute="width" id="Tgn-Qr-McK"/>
                             <constraint firstItem="VhP-6i-CTQ" firstAttribute="height" secondItem="eKP-Kv-ZGG" secondAttribute="height" id="cXa-Wv-mCx"/>
-                            <constraint firstItem="9P8-yp-hdf" firstAttribute="top" secondItem="VhP-6i-CTQ" secondAttribute="bottom" constant="-143" id="i3u-w2-3rb"/>
                             <constraint firstItem="VhP-6i-CTQ" firstAttribute="centerY" secondItem="eKP-Kv-ZGG" secondAttribute="centerY" id="ieV-Be-2aN"/>
-                            <constraint firstItem="9P8-yp-hdf" firstAttribute="centerX" secondItem="VhP-6i-CTQ" secondAttribute="centerX" id="oPY-T2-f6J"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="label" destination="9P8-yp-hdf" id="w2l-rl-tkI"/>
                         <outlet property="previewView" destination="VhP-6i-CTQ" id="jps-oV-8t9"/>
                         <outlet property="view" destination="eKP-Kv-ZGG" id="YSC-02-IrO"/>
                     </connections>
@@ -435,6 +425,7 @@
                                 <state key="normal" title="Register!"/>
                                 <connections>
                                     <action selector="RegisterButton:" destination="AMS-Ry-oKo" eventType="touchUpInside" id="FaB-6d-cLD"/>
+                                    <segue destination="y3Y-Pd-que" kind="unwind" identifier="unwindToLoginReg" unwindAction="unwindToLoginWithSegue:" id="MFf-mV-EC2"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7b-0r-a2x">
@@ -467,7 +458,7 @@
                                 <state key="normal" title="Back"/>
                                 <connections>
                                     <action selector="BackButton:" destination="AMS-Ry-oKo" eventType="touchUpInside" id="29w-iy-BXj"/>
-                                    <segue destination="y3Y-Pd-que" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="oJe-Zd-V6y"/>
+                                    <segue destination="y3Y-Pd-que" kind="unwind" identifier="unwindToLoginBack" unwindAction="unwindToLoginWithSegue:" id="G2Z-do-YDa"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -525,7 +516,6 @@
                         <outlet property="LastNameInput" destination="7D3-yc-Cvg" id="iSH-Og-pl1"/>
                         <outlet property="PasswordSignUpInput" destination="Mt5-EC-oNw" id="F3e-T6-GpB"/>
                         <outlet property="UserNameSignUpInput" destination="maK-bL-cNL" id="dfq-Xx-nc8"/>
-                        <segue destination="y3Y-Pd-que" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="Ccj-Bl-U5b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ayV-2l-bB4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -785,7 +775,7 @@
                                 <state key="normal" title="Invite"/>
                                 <connections>
                                     <action selector="invitePressed:" destination="vin-om-kOT" eventType="touchUpInside" id="QVE-o0-dcV"/>
-                                    <segue destination="szn-T2-7xl" kind="unwind" identifier="unwindToMyEvent" unwindAction="unwindToMyEventWithSegue:" id="vZs-yg-yib"/>
+                                    <segue destination="szn-T2-7xl" kind="unwind" identifier="unwindToMyEventInv" unwindAction="unwindToMyEventWithSegue:" id="cR7-MF-cDY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jkj-ra-H5d">
@@ -794,7 +784,7 @@
                                 <state key="normal" title="Back"/>
                                 <connections>
                                     <action selector="backButton:" destination="vin-om-kOT" eventType="touchUpInside" id="QQa-af-sQD"/>
-                                    <segue destination="szn-T2-7xl" kind="unwind" identifier="unwindToMyEvent" unwindAction="unwindToMyEventWithSegue:" id="3Jk-lH-woG"/>
+                                    <segue destination="szn-T2-7xl" kind="unwind" identifier="unwindToMyEventBack" unwindAction="unwindToMyEventWithSegue:" id="Ife-qr-eyu"/>
                                 </connections>
                             </button>
                         </subviews>

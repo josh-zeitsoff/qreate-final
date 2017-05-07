@@ -14,6 +14,10 @@ import GoogleSignIn
 class LogInViewController: UIViewController, GIDSignInUIDelegate {
     
     var handle: FIRAuthStateDidChangeListenerHandle?
+    
+    var emailPass : String?
+    
+    var passwordPass : String?
 
     @IBOutlet weak var EmailInput: UITextField!
     
@@ -66,11 +70,21 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate {
     
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if emailPass != nil && passwordPass != nil {
+            PasswordInput.text = passwordPass!
+            EmailInput.text = emailPass!
+        } else {
+            PasswordInput.text = ""
+            EmailInput.text = ""
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        // Firebase shit
+        
         PasswordInput.isSecureTextEntry = true
         PasswordInput.autocorrectionType = .no
         EmailInput.autocorrectionType = .no
@@ -82,6 +96,7 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate {
             }
         }
         self.hideKeyboard()
+        
         
     }
     

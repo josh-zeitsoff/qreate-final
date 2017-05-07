@@ -34,6 +34,7 @@ class WhosComingViewController: UIViewController, UITableViewDataSource, UITable
         super.viewDidLoad()
         WhosComingTableView.dataSource = self
         WhosComingTableView.delegate = self
+        WhosComingTableView.allowsSelection = false
         attending = [User]()
         peopleHere = [Bool]()
 
@@ -69,7 +70,7 @@ class WhosComingViewController: UIViewController, UITableViewDataSource, UITable
         let cell = WhosComingTableView.dequeueReusableCell(withIdentifier: "whosComingTableViewCell") as! WhosComingTableViewCell
         if (scanned?.keys.contains(eventId!))! {
             if scanned?[eventId!] != nil {
-                if (scanned?[eventId!]?.contains((attending?[indexPath.row].username)!))! {
+                if (scanned?[eventId!]?.contains((allInvited?[eventId!]?[indexPath.row])!))! {
                     cell.checkmark.text = "\u{2714}"
                 }
                 else {

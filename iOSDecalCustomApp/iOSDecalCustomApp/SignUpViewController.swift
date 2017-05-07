@@ -89,6 +89,17 @@ class SignUpViewController: UIViewController {
         return false
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            if identifier == "unwindToLoginReg" {
+                if let dest = segue.destination as? LogInViewController {
+                    dest.emailPass = EmailInput.text
+                    dest.passwordPass = PasswordSignUpInput.text
+                }
+            }
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

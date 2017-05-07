@@ -76,6 +76,7 @@ class ChooseInvitesViewController: UIViewController, UITableViewDelegate, UITabl
                 for inv in invites {
                     if (inv.eventId == event?.eventId && inv.username == name) {
                         found = true
+                        break
                     }
                 }
                 if !found {

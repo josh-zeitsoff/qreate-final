@@ -17,7 +17,7 @@ class CodeScannervarwController: UIViewController {
     var usersNamesOfPeopleThatAreHere : [String]?
     var eid: String?
     
-    @IBOutlet weak var label: UILabel!
+    //@IBOutlet weak var label: UILabel!
     @IBAction func backButton(_ sender: UIButton) {
         //updateInvites()
         //self.performSegue(withIdentifier: "backToEvent", sender: self)
@@ -45,7 +45,15 @@ class CodeScannervarwController: UIViewController {
                         
                         for inv in invites {
                             if (inv.eventId == self.eid && inv.username == username && inv.present == "false") {
-                                self.label.text = "Status: Success! " + inv.username
+                                
+                                let alertController = UIAlertController(title: "Success!", message: "\(inv.username) has checked in.", preferredStyle: .alert)
+                                
+                                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                                alertController.addAction(defaultAction)
+                                
+                                self.present(alertController, animated: true, completion: nil)
+                                
+                                //self.label.text = "Status: Success! " + inv.username
                                 self.usersNamesOfPeopleThatAreHere?.append(inv.username)
                                 inv.present = "true"
                                 //tell database scanned
@@ -68,10 +76,12 @@ class CodeScannervarwController: UIViewController {
         if let identifier = segue.identifier {
             if identifier == "unwindToMyEvent" {
                 if let dest = segue.destination as? MyEventViewController {
-                    if dest.scanned.keys.contains(eid!) {
-                        dest.scanned[eid!]! += self.usersNamesOfPeopleThatAreHere!
-                    } else {
-                        dest.scanned[eid!] = self.usersNamesOfPeopleThatAreHere
+                    if dest.scanned != nil {
+                        if dest.scanned.keys.contains(eid!) {
+                            dest.scanned[eid!]! += self.usersNamesOfPeopleThatAreHere!
+                        } else {
+                            dest.scanned[eid!] = self.usersNamesOfPeopleThatAreHere
+                        }
                     }
                     
                     //dest.whoHasCheckedIn = self.usersNamesOfPeopleThatAreHere
