@@ -58,6 +58,14 @@ class CodeScannervarwController: UIViewController {
                                 inv.present = "true"
                                 //tell database scanned
                             }
+                            else if (inv.eventId == self.eid && inv.username == username && inv.present == "true") {
+                                let alertController = UIAlertController(title: "Oops!", message: "\(inv.username) has already checked in.", preferredStyle: .alert)
+                            
+                                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                                alertController.addAction(defaultAction)
+                            
+                                self.present(alertController, animated: true, completion: nil)
+                            }
                         }
                     }
                 }

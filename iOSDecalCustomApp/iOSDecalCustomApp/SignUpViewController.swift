@@ -74,6 +74,7 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         UserNameSignUpInput?.autocorrectionType = .no
+        EmailInput?.autocorrectionType = .no
         PasswordSignUpInput?.autocorrectionType = .no
         PasswordSignUpInput?.isSecureTextEntry = true
         self.hideKeyboard()
