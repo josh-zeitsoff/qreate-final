@@ -57,13 +57,7 @@ class CodeScannervarwController: UIViewController {
                                 //self.label.text = "Status: Success! " + inv.username
                                 self.usersNamesOfPeopleThatAreHere?.append(inv.username)
                                 inv.present = "true"
-                                for key in inviteIDs {
-                                    if inv.key == key {
-                                        dbRef.updateChildValues([
-                                            "present": "true"
-                                            ])
-                                    }
-                                }
+                                
                                 //tell database scanned
                             }
                             else if (inv.eventId == self.eid && inv.username == username && inv.present == "true") {
@@ -93,10 +87,12 @@ class CodeScannervarwController: UIViewController {
             if identifier == "unwindToMyEvent" {
                 if let dest = segue.destination as? MyEventViewController {
                     if dest.scanned != nil {
-                        if dest.scanned.keys.contains(eid!) {
-                            dest.scanned[eid!]! += self.usersNamesOfPeopleThatAreHere!
-                        } else {
-                            dest.scanned[eid!] = self.usersNamesOfPeopleThatAreHere
+                        if eid != nil {
+                            if dest.scanned.keys.contains(eid!) {
+                                dest.scanned[eid!]! += self.usersNamesOfPeopleThatAreHere!
+                            } else {
+                                dest.scanned[eid!] = self.usersNamesOfPeopleThatAreHere
+                            }
                         }
                     }
                     

@@ -133,7 +133,6 @@ func getPerson(indexPath: IndexPath) -> String? {
         "username": username as AnyObject,
         "eventid": eventId as AnyObject,
         "present": present as AnyObject,
-        "key": key as AnyObject
     ]
     dbRef.child(firInvitesNode).child(key).setValue(dict )
     inviteIDs.append(key)
@@ -164,8 +163,7 @@ func getInvites(completion: @escaping ([Invites]?) -> Void) {
                     let userid = invitesDict[key]?["username"] as! String
                     let eventid = invitesDict[key]?["eventid"] as! String
                     let present = invitesDict[key]?["present"] as! String
-                    let key = invitesDict[key]?["key"] as! String
-                    let invite = Invites.init(eventID: eventid, userID: userid, present: present, key: key)
+                    let invite = Invites.init(eventID: eventid, userID: userid, present: present)
                     inviteArray.append(invite)
                     }
                 }
